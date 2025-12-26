@@ -6,7 +6,7 @@
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Clean-Scripts/EasyGo-Expense-Tracker/refs/heads/main/logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
-    <title>Easy Go | Official Menu</title>
+    <title>Easy Go | Menu</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
         body { font-family: 'Inter', sans-serif; background: #ffffff; color: #1a1a1a; }
@@ -29,7 +29,7 @@
 
     <div class="max-w-3xl mx-auto px-4 pt-10 pb-20 text-center">
         <h1 class="text-7xl font-black tracking-tighter uppercase leading-none text-gray-900">Easy Go</h1>
-        <p class="text-gray-500 uppercase text-xs font-black tracking-[0.4em] mt-3 italic">Easy to Take, Easy to Go!</p>
+        <p class="text-gray-500 uppercase text-xs font-black tracking-[0.4em] mt-3 italic">Delivering Freshness and Speed !</p>
 
         <div class="mt-8 p-6 bg-green-600 rounded-[2rem] text-white shadow-lg border-2 border-green-700">
             <p class="text-xl font-black uppercase">🛵 Free Delivery above ₹199</p>
@@ -94,7 +94,7 @@
 
         <div class="mt-16 flex flex-col items-center gap-6">
             <button onclick="shareMenu()" class="bg-gray-900 text-white px-10 py-4 rounded-2xl font-black uppercase text-sm shadow-xl flex items-center gap-3 active:scale-95 transition-transform">
-                <span>📤 Share This Menu</span>
+                <span>📤 Share With Other 😋</span>
             </button>
             
             <div class="bg-white p-4 rounded-3xl shadow-md border border-gray-100">
@@ -107,7 +107,7 @@
             <p class="text-xs font-black text-gray-400 uppercase tracking-widest">Place Your Order</p>
             <a href="tel:92389631346" class="text-5xl font-black text-gray-900 tracking-tighter hover:text-indigo-600 transition-colors">92389 631346</a>
             <div class="mt-4 flex flex-col items-center">
-                <p class="text-sm font-bold uppercase text-gray-600">📍 Visit Us in Indore</p>
+                <p class="text-sm font-bold uppercase text-gray-600">📍 Visit Us</p>
                 <p class="text-xs font-medium text-gray-400 uppercase tracking-widest mt-1">114, Prime Square, Omaxe City 1, Indore</p>
             </div>
         </div>
@@ -129,8 +129,8 @@
             if (navigator.share) {
                 try {
                     await navigator.share({
-                        title: 'Easy Go | Official Menu',
-                        text: 'Easy to Take, Easy to Go! Fresh snacks in Indore.',
+                        title: 'Easy Go | Menu',
+                        text: 'Delivering Freshness and Speed !',
                         url: window.location.href
                     });
                 } catch (err) {
