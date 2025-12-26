@@ -9,86 +9,137 @@
     <title>Easy Go | Official Menu</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
-        body { font-family: 'Inter', sans-serif; background: #ffffff; margin: 0; }
-        .menu-card { transition: all 0.3s ease; }
-        .special-badge { background: linear-gradient(90deg, #f59e0b, #d97706); }
+        body { font-family: 'Inter', sans-serif; background: #ffffff; color: #1a1a1a; }
+        .banner-clip { clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); }
+        .price-tag { text-shadow: 1px 1px 0px #fff; }
     </style>
 </head>
-<body class="min-h-screen">
+<body class="antialiased">
 
-    <div id="customer-view" class="min-h-screen bg-white">
-        <div class="max-w-2xl mx-auto p-8 md:p-16 text-center">
+    <header class="relative mb-8">
+        <div class="h-48 md:h-64 overflow-hidden banner-clip">
+            <img src="https://raw.githubusercontent.com/Clean-Scripts/EasyGo-Expense-Tracker/refs/heads/main/Banner.png" 
+                 class="w-full h-full object-cover" alt="Easy Go Banner">
+        </div>
+        <div class="absolute -bottom-6 left-0 right-0 flex justify-center">
             <img src="https://raw.githubusercontent.com/Clean-Scripts/EasyGo-Expense-Tracker/refs/heads/main/logo.png" 
-                 class="h-28 mx-auto mb-6 select-none">
-            
-            <h1 class="text-6xl font-black text-gray-900 tracking-tighter uppercase leading-none">Easy Go</h1>
-            <p class="text-gray-400 uppercase text-[10px] font-black tracking-[0.5em] mt-2 italic">Easy to Take, Easy to Go!</p>
-            
-            <div id="menuList" class="mt-12 border-t-2 border-gray-100 divide-y divide-gray-50">
-                <p class="py-20 text-gray-300 font-bold animate-pulse uppercase tracking-widest text-xs">Loading Live Menu...</p>
+                 class="h-32 w-32 rounded-full border-4 border-white shadow-xl bg-white p-1">
+        </div>
+    </header>
+
+    <div class="max-w-3xl mx-auto px-4 pt-10 pb-20 text-center">
+        <h1 class="text-7xl font-black tracking-tighter uppercase leading-none text-gray-900">Easy Go</h1>
+        <p class="text-gray-500 uppercase text-xs font-black tracking-[0.4em] mt-3 italic">Easy to Take, Easy to Go!</p>
+
+        <div class="mt-8 p-6 bg-green-600 rounded-[2rem] text-white shadow-lg border-2 border-green-700">
+            <p class="text-xl font-black uppercase">🛵 Free Delivery above ₹199</p>
+            <p class="text-xs font-bold uppercase mt-1 opacity-90 tracking-widest">Within 4 km from Prime Square</p>
+        </div>
+
+        <div class="mt-12 space-y-6">
+            <div class="p-6 bg-gray-50 rounded-3xl border-2 border-gray-100 flex justify-between items-center hover:scale-[1.02] transition-transform">
+                <div class="text-left">
+                    <h2 class="text-3xl font-black uppercase leading-none">Steamed Veg Momos</h2>
+                    <p class="text-lg font-bold text-gray-400 mt-1 uppercase">Standard 8 Pieces</p>
+                </div>
+                <div class="text-4xl font-black text-indigo-600 price-tag">₹70</div>
             </div>
 
-            <div class="mt-12 p-8 bg-indigo-50 rounded-[2.5rem] border border-indigo-100">
-                <p class="text-indigo-900 font-black text-sm uppercase">Free Delivery on orders above ₹199</p>
-                <p class="text-[10px] text-indigo-400 font-bold uppercase mt-1 tracking-widest">Valid within 4 km from Prime Square</p>
+            <div class="p-6 bg-amber-50 rounded-3xl border-2 border-amber-200 flex justify-between items-center relative overflow-hidden hover:scale-[1.02] transition-transform">
+                <div class="text-left">
+                    <span class="absolute top-0 left-0 bg-amber-400 text-white text-[10px] font-black px-4 py-1 rounded-br-xl uppercase">Today's Special</span>
+                    <h2 class="text-3xl font-black uppercase leading-none pt-2">Fried Veg Momos</h2>
+                    <p class="text-lg font-bold text-amber-600/60 mt-1 uppercase">Crispy 8 Pieces</p>
+                </div>
+                <div class="text-4xl font-black text-amber-600 price-tag">₹80</div>
             </div>
 
-            <div class="mt-16 pt-10 border-t border-dotted border-gray-200 flex flex-col items-center gap-4">
+            <div class="p-6 bg-gray-50 rounded-3xl border-2 border-gray-100 flex justify-between items-center hover:scale-[1.02] transition-transform">
+                <div class="text-left">
+                    <h2 class="text-3xl font-black uppercase leading-none">Steamed Cheese Corn</h2>
+                    <p class="text-lg font-bold text-gray-400 mt-1 uppercase">Standard 8 Pieces</p>
+                </div>
+                <div class="text-4xl font-black text-indigo-600 price-tag">₹90</div>
+            </div>
+
+            <div class="p-6 bg-gray-50 rounded-3xl border-2 border-gray-100 flex justify-between items-center hover:scale-[1.02] transition-transform">
+                <div class="text-left">
+                    <h2 class="text-3xl font-black uppercase leading-none">Fried Cheese Corn</h2>
+                    <p class="text-lg font-bold text-gray-400 mt-1 uppercase">Crispy 8 Pieces</p>
+                </div>
+                <div class="text-4xl font-black text-indigo-600 price-tag">₹100</div>
+            </div>
+
+            <div class="p-6 bg-gray-50 rounded-3xl border-2 border-gray-100 flex justify-between items-center hover:scale-[1.02] transition-transform">
+                <div class="text-left">
+                    <h2 class="text-3xl font-black uppercase leading-none">Mini Samosas</h2>
+                    <p class="text-lg font-bold text-gray-400 mt-1 uppercase">Standard 8 Pieces</p>
+                </div>
+                <div class="text-4xl font-black text-indigo-600 price-tag">₹140</div>
+            </div>
+
+            <div class="p-6 bg-blue-50 rounded-3xl border-2 border-blue-200 flex justify-between items-center hover:scale-[1.02] transition-transform">
+                <div class="text-left">
+                    <h2 class="text-3xl font-black uppercase leading-none text-blue-900">French Fries</h2>
+                    <p class="text-xl font-black text-blue-500 mt-1 uppercase">Large 150g Serving</p>
+                </div>
+                <div class="text-4xl font-black text-blue-600 price-tag">₹80</div>
+            </div>
+        </div>
+
+        <div class="mt-12 py-8 px-4 border-2 border-dashed border-gray-200 rounded-[2.5rem]">
+            <p class="text-gray-400 font-bold uppercase text-sm mb-2">Need something special?</p>
+            <h3 class="text-2xl font-black uppercase">For custom menu contact directly</h3>
+        </div>
+
+        <div class="mt-16 flex flex-col items-center gap-6">
+            <button onclick="shareMenu()" class="bg-gray-900 text-white px-10 py-4 rounded-2xl font-black uppercase text-sm shadow-xl flex items-center gap-3 active:scale-95 transition-transform">
+                <span>📤 Share This Menu</span>
+            </button>
+            
+            <div class="bg-white p-4 rounded-3xl shadow-md border border-gray-100">
                 <canvas id="menuQR"></canvas>
-                <p class="text-4xl font-black text-gray-900 tracking-tighter">92389 631346</p>
-                <p class="text-[10px] font-medium text-gray-400 uppercase tracking-widest text-center">
-                    114, Prime Square, Omaxe City 1, Indore
-                </p>
+                <p class="text-[10px] font-black text-gray-400 uppercase mt-2 tracking-tighter">Scan to Share</p>
+            </div>
+        </div>
+
+        <div class="mt-16 pt-10 border-t-4 border-gray-900 flex flex-col items-center gap-2">
+            <p class="text-xs font-black text-gray-400 uppercase tracking-widest">Place Your Order</p>
+            <a href="tel:92389631346" class="text-5xl font-black text-gray-900 tracking-tighter hover:text-indigo-600 transition-colors">92389 631346</a>
+            <div class="mt-4 flex flex-col items-center">
+                <p class="text-sm font-bold uppercase text-gray-600">📍 Visit Us in Indore</p>
+                <p class="text-xs font-medium text-gray-400 uppercase tracking-widest mt-1">114, Prime Square, Omaxe City 1, Indore</p>
             </div>
         </div>
     </div>
 
     <script>
-        async function loadMenu() {
-            try {
-                // Fetch the data file pushed from your private admin
-                const res = await fetch('menu.json');
-                if (!res.ok) throw new Error("Menu file not found");
-                const products = await res.json();
-                const list = document.getElementById('menuList');
-                
-                list.innerHTML = products.map(p => `
-                    <div class="py-10 flex flex-col gap-3 menu-card">
-                        <div class="flex justify-between items-baseline">
-                            <div class="text-left">
-                                <h3 class="text-3xl font-black text-gray-900 uppercase tracking-tighter leading-none">${p.name}</h3>
-                                ${p.special ? '<span class="bg-amber-400 text-white text-[8px] font-black px-2 py-0.5 rounded-full w-max mt-2 block tracking-widest uppercase animate-bounce">Today\'s Special ★</span>' : ''}
-                            </div>
-                            <span class="text-2xl font-black text-indigo-600">₹${p.std}</span>
-                        </div>
-                        
-                        <div class="grid grid-cols-3 gap-2 text-[8px] font-black uppercase text-gray-400 tracking-widest text-left">
-                            <span class="bg-gray-50 p-2 rounded border border-gray-100">
-                                ${p.name === "French Fries" ? p.grams + 'g Serving' : 'Standard 8pc'}
-                            </span>
-                            <span class="bg-gray-50 p-2 rounded">Family Pack (16pc): ₹${Math.round(p.std * 1.8)}</span>
-                            <span class="bg-gray-50 p-2 rounded text-indigo-600 border border-indigo-100 font-black">XL Pack (32pc): ₹${Math.round(p.std * 3.5)}</span>
-                        </div>
-                    </div>
-                `).join('');
+        // Initialize QR Code
+        window.onload = function() {
+            new QRious({
+                element: document.getElementById('menuQR'),
+                value: window.location.href,
+                size: 160,
+                padding: 10
+            });
+        };
 
-                // QR Code for WhatsApp Orders
-                new QRious({ 
-                    element: document.getElementById('menuQR'), 
-                    value: "https://wa.me/92389631346", 
-                    size: 150 
-                });
-
-            } catch (e) { 
-                document.getElementById('menuList').innerHTML = `
-                    <div class="py-20">
-                        <p class="text-gray-400 font-bold italic uppercase tracking-widest text-xs mb-2">Syncing Menu with Kitchen...</p>
-                        <p class="text-[10px] text-gray-300">Please refresh in 1 minute</p>
-                    </div>`; 
+        // Native Web Share API
+        async function shareMenu() {
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: 'Easy Go | Official Menu',
+                        text: 'Easy to Take, Easy to Go! Fresh snacks in Indore.',
+                        url: window.location.href
+                    });
+                } catch (err) {
+                    console.log('Share cancelled');
+                }
+            } else {
+                alert('Copy this link to share: ' + window.location.href);
             }
         }
-
-        window.onload = loadMenu;
     </script>
 </body>
 </html>
