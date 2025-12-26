@@ -6,7 +6,7 @@
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Clean-Scripts/EasyGo-Expense-Tracker/refs/heads/main/logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
-    <title>Easy Go | Official Menu</title>
+    <title>Easy Go | Menu</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
         body { font-family: 'Inter', sans-serif; background: #ffffff; color: #1a1a1a; }
@@ -83,35 +83,33 @@
         <div class="mt-20">
             <div class="flex items-center gap-4 justify-center mb-8">
                 <div class="h-[2px] bg-gray-200 flex-grow"></div>
-                <h3 class="text-2xl font-black uppercase tracking-widest text-gray-400">Other Frozen Items</h3>
+                <h3 class="text-2xl font-black uppercase tracking-widest text-gray-400">Other Items</h3>
                 <div class="h-[2px] bg-gray-200 flex-grow"></div>
             </div>
             
-            <p class="text-[10px] font-black uppercase tracking-widest mb-10 text-green-600">Partnered with Big Bee™ - Heat, Eat & Smile!</p>
+            <p class="text-[10px] font-black uppercase tracking-widest mb-10 text-green-600">Partnered with US™ - Heat, Eat & Smile!</p>
 
             <div class="grid grid-cols-2 gap-4">
                 <div class="frozen-card p-6 rounded-[2rem] text-left">
-                    <h4 class="text-lg font-black uppercase mb-4 text-gray-900 border-b-2 border-gray-100 pb-2">Frozen Snacks</h4>
+                    <h4 class="text-lg font-black uppercase mb-4 text-gray-900 border-b-2 border-gray-100 pb-2">Ready To Go Snacks</h4>
                     <ul class="text-[11px] font-bold uppercase space-y-2 text-gray-500">
-                        <li>• Cheese Cigar Roll</li>
-                        <li>• Aloo Bada / Dosa Rolls</li>
-                        <li>• Cheese Corn Nuggets</li>
-                        <li>• Veg Burger Patties</li>
-                        <li>• Hara Bhara Kabab</li>
-                        <li>• Manchurian / Cheese Balls</li>
-                        <li>• Paneer & Veg Momos</li>
+                        <li class="text-green-600">Cheese Cigar Roll</li>
+                        <li class="text-green-600">Dosa Rolls</li>
+                        <li class="text-green-600">Cheese Corn Nuggets</li>
+                        <li class="text-green-600">Veg Burger Patties</li>
+                        <li class="text-green-600">Hara Bhara Kabab</li>
+                        <li class="text-green-600">Cheese Balls</li>
                     </ul>
                 </div>
 
                 <div class="frozen-card p-6 rounded-[2rem] text-left">
                     <h4 class="text-lg font-black uppercase mb-4 text-gray-900 border-b-2 border-gray-100 pb-2">Essentials</h4>
                     <ul class="text-[11px] font-bold uppercase space-y-2 text-gray-500">
-                        <li class="text-green-600">NEW: Mix Veg / Sweet Corn</li>
-                        <li class="text-green-600">NEW: Green Peas</li>
-                        <li>• Dal Makhani</li>
-                        <li>• Pav Bhaji</li>
-                        <li>• Momos Chutney</li>
-                        <li>• Special Garlic Sauce</li>
+                        <li class="text-green-600">Mix Veg / Sweet Corn</li>
+                        <li class="text-green-600">Green Peas</li>
+                        <li class="text-green-600">Dal Makhani</li>
+                        <li class="text-green-600">Pav Bhaji</li>
+                        <li class="text-green-600">Special Garlic Sauce</li>
                     </ul>
                 </div>
 
@@ -130,18 +128,8 @@
         </div>
 
         <div class="mt-16 py-8 px-4 border-2 border-dashed border-gray-200 rounded-[2.5rem]">
-            <p class="text-gray-400 font-bold uppercase text-sm mb-2">Bulk or Custom Frozen Orders?</p>
-            <h3 class="text-2xl font-black uppercase">Connect directly for Frozen Items</h3>
-        </div>
-
-        <div class="mt-16 flex flex-col items-center gap-6">
-            <button onclick="shareMenu()" class="bg-gray-900 text-white px-10 py-4 rounded-2xl font-black uppercase text-sm shadow-xl flex items-center gap-3 active:scale-95 transition-transform">
-                <span>📤 Share With Other 😋</span>
-            </button>
-            <div class="bg-white p-4 rounded-3xl shadow-md border border-gray-100">
-                <canvas id="menuQR"></canvas>
-                <p class="text-[10px] font-black text-gray-400 uppercase mt-2 tracking-tighter">Scan to Share Menu</p>
-            </div>
+            <p class="text-gray-400 font-bold uppercase text-sm mb-2">Bulk/ Custom Orders?</p>
+            <h3 class="text-2xl font-black uppercase">Connect Directly 📞</h3>
         </div>
 
         <div class="mt-16 pt-10 border-t-4 border-gray-900 flex flex-col items-center gap-2">
@@ -153,6 +141,16 @@
             </div>
         </div>
     </div>
+
+            <div class="mt-16 flex flex-col items-center gap-6">
+            <button onclick="shareMenu()" class="bg-gray-900 text-white px-10 py-4 rounded-2xl font-black uppercase text-sm shadow-xl flex items-center gap-3 active:scale-95 transition-transform">
+                <span>📤 Share With Others📱 😋</span>
+            </button>
+            <div class="bg-white p-4 rounded-3xl shadow-md border border-gray-100">
+                <canvas id="menuQR"></canvas>
+                <p class="text-[10px] font-black text-gray-400 uppercase mt-2 tracking-tighter">Share QR with Others</p>
+            </div>
+        </div>
 
     <script>
         window.onload = function() {
