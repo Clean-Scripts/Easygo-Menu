@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Easy Go | Official Menu</title>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap'); body { font-family: 'Inter', sans-serif; }</style>
+</head>
+<body class="bg-white min-h-screen">
+    <div class="max-w-2xl mx-auto p-8 text-center">
+        <img src="https://raw.githubusercontent.com/Clean-Scripts/EasyGo-Expense-Tracker/refs/heads/main/logo.png" class="h-24 mx-auto mb-4">
+        <h1 class="text-6xl font-black text-gray-900 tracking-tighter uppercase">Easy Go</h1>
+        <p class="text-gray-400 uppercase text-[10px] font-black tracking-[0.5em] mt-2 italic">Easy to Take, Easy to Go!</p>
+        
+        <div id="menuList" class="mt-12 border-t-2 border-gray-100 divide-y divide-gray-50">
+            </div>
+
+        <div class="mt-12 p-8 bg-indigo-50 rounded-[2.5rem] border border-indigo-100">
+            <p class="text-indigo-900 font-black text-sm uppercase">Free Delivery on orders above ₹199</p>
+            <p class="text-[10px] text-indigo-400 font-bold uppercase mt-1 tracking-widest">Valid within 4 km from Prime Square</p>
+        </div>
+    </div>
+
+    <script>
+        async function loadMenu() {
+            try {
+                const res = await fetch('menu.json');
+                const products = await res.json();
+                const list = document.getElementById('menuList');
+                
+                list.innerHTML = products.map(p => `
+                    <div class="py-10 flex flex-col gap-3">
+                        <div class="flex justify-between items-baseline">
+                            <div class="text-left">
+                                <h3 class="text-3xl font-black text-gray-900 uppercase tracking-tighter leading-none">${p.name}</h3>
+                                ${p.special ? '<span class="bg-amber-400 text-white text-[8px] font-black px-2 py-0.5 rounded-full w-max mt-2 block tracking-widest uppercase">Today\'s Special ★</span>' : ''}
+                            </div>
+                            <span class="text-2xl font-black text-indigo-600">₹${p.std}</span>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2 text-[8px] font-black uppercase text-gray-400 tracking-widest text-left">
+                            <span class="bg-gray-50 p-2 rounded">
+                                ${p.name === "French Fries" ? p.grams + 'g Serving' : 'Standard 8pc'}
+                            </span>
+                            <span class="bg-gray-50 p-2 rounded">Family Pack: ₹${Math.round(p.std * 1.8)}</span>
+                            <span class="bg-gray-50 p-2 rounded text-indigo-600 border border-indigo-100">XL Pack: ₹${Math.round(p.std * 3.5)}</span>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (e) { document.getElementById('menuList').innerHTML = "<p class='mt-10 font-bold text-gray-400'>Updating Menu...</p>"; }
+        }
+        loadMenu();
+    </script>
+</body>
+</html>
