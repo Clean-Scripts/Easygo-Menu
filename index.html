@@ -6,12 +6,14 @@
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Clean-Scripts/EasyGo-Expense-Tracker/refs/heads/main/logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
-    <title>Easy Go | Menu</title>
+    <title>Easy Go | Official Menu</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
         body { font-family: 'Inter', sans-serif; background: #ffffff; color: #1a1a1a; }
         .banner-clip { clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); }
         .price-tag { text-shadow: 1px 1px 0px #fff; }
+        .frozen-card { border: 1px solid #e5e7eb; transition: all 0.2s; }
+        .frozen-card:hover { border-color: #10b981; background-color: #f0fdf4; }
     </style>
 </head>
 <body class="antialiased">
@@ -29,77 +31,116 @@
 
     <div class="max-w-3xl mx-auto px-4 pt-10 pb-20 text-center">
         <h1 class="text-7xl font-black tracking-tighter uppercase leading-none text-gray-900">Easy Go</h1>
-        <p class="text-gray-500 uppercase text-xs font-black tracking-[0.4em] mt-3 italic">Delivering Freshness and Speed !</p>
+        <p class="text-gray-500 uppercase text-xs font-black tracking-[0.2em] mt-3 italic">Delivering Freshness and Speed !</p>
 
-        <div class="mt-8 p-6 bg-green-600 rounded-[2rem] text-white shadow-lg border-2 border-green-700">
-            <p class="text-xl font-black uppercase">🛵 Free Delivery @ Order (>) ₹199</p>
-            <p class="text-xs font-bold uppercase mt-1 opacity-90 tracking-widest">Within 4 km from Prime Square</p>
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+            <div class="p-5 bg-gray-900 text-white rounded-3xl flex flex-col justify-center">
+                <p class="text-xs font-black text-green-400 uppercase tracking-widest mb-1">Our Credentials</p>
+                <h3 class="text-lg font-bold leading-tight uppercase">MSME | FSSAI | GST Registered</h3>
+                <p class="text-[10px] text-gray-400 mt-2 font-medium tracking-wide">Ensuring the highest standards of safety and professional service.</p>
+            </div>
+            <div class="p-5 bg-indigo-50 border-2 border-indigo-100 rounded-3xl flex flex-col justify-center">
+                <p class="text-xs font-black text-indigo-600 uppercase tracking-widest mb-1">Commitment</p>
+                <h3 class="text-lg font-bold text-gray-900 uppercase italic">Affordable rates for premium quality.</h3>
+                <p class="text-[10px] text-indigo-400 mt-2 font-black uppercase">Delivering Freshness & Speed!</p>
+            </div>
         </div>
 
-        <div class="mt-12 space-y-6">
-            <div class="p-6 bg-gray-50 rounded-3xl border-2 border-gray-100 flex justify-between items-center hover:scale-[1.02] transition-transform">
-                <div class="text-left">
-                    <h2 class="text-3xl font-black uppercase leading-none">Steamed Veg Momos</h2>
-                    <p class="text-lg font-bold text-gray-400 mt-1 uppercase">Standard 8 Pieces</p>
-                </div>
+        <div class="mt-8 p-6 bg-green-600 rounded-[2rem] text-white shadow-lg border-2 border-green-700">
+            <p class="text-xl font-black uppercase">🛵 Special Offer: For orders above ₹299</p>
+            <p class="text-xs font-bold uppercase mt-1 opacity-90 tracking-widest">Free Delivery within 4 km from Prime Square</p>
+        </div>
+
+        <div class="mt-12 space-y-4">
+            <h3 class="text-xs font-black text-gray-400 uppercase tracking-[0.5em] mb-6">Hot & Fresh Snacks</h3>
+            
+            <div class="p-6 bg-gray-50 rounded-3xl border-2 border-gray-100 flex justify-between items-center hover:scale-[1.01] transition-transform">
+                <div class="text-left"><h2 class="text-3xl font-black uppercase leading-none">Steamed Veg Momos</h2><p class="text-lg font-bold text-gray-400 mt-1 uppercase">Standard 8 Pieces</p></div>
                 <div class="text-4xl font-black text-indigo-600 price-tag">₹69</div>
             </div>
 
-            <div class="p-6 bg-amber-50 rounded-3xl border-2 border-amber-200 flex justify-between items-center relative overflow-hidden hover:scale-[1.02] transition-transform">
-                <div class="text-left">
-                    <span class="absolute top-0 left-0 bg-amber-400 text-white text-[10px] font-black px-4 py-1 rounded-br-xl uppercase">Today's Special</span>
-                    <h2 class="text-3xl font-black uppercase leading-none pt-2">Fried Veg Momos</h2>
-                    <p class="text-lg font-bold text-amber-600/60 mt-1 uppercase">Crispy 8 Pieces</p>
-                </div>
+            <div class="p-6 bg-amber-50 rounded-3xl border-2 border-amber-200 flex justify-between items-center relative overflow-hidden hover:scale-[1.01] transition-transform">
+                <div class="text-left"><span class="absolute top-0 left-0 bg-amber-400 text-white text-[10px] font-black px-4 py-1 rounded-br-xl uppercase">Special</span><h2 class="text-3xl font-black uppercase leading-none pt-2">Fried Veg Momos</h2><p class="text-lg font-bold text-amber-600/60 mt-1 uppercase">Crispy 8 Pieces</p></div>
                 <div class="text-4xl font-black text-amber-600 price-tag">₹79</div>
             </div>
 
-            <div class="p-6 bg-gray-50 rounded-3xl border-2 border-gray-100 flex justify-between items-center hover:scale-[1.02] transition-transform">
-                <div class="text-left">
-                    <h2 class="text-3xl font-black uppercase leading-none">Steamed Cheese Corn Momos</h2>
-                    <p class="text-lg font-bold text-gray-400 mt-1 uppercase">Standard 8 Pieces</p>
-                </div>
+            <div class="p-6 bg-gray-50 rounded-3xl border-2 border-gray-100 flex justify-between items-center hover:scale-[1.01] transition-transform">
+                <div class="text-left"><h2 class="text-3xl font-black uppercase leading-none">Cheese Corn Momos</h2><p class="text-lg font-bold text-gray-400 mt-1 uppercase">Standard 8 Pieces</p></div>
                 <div class="text-4xl font-black text-indigo-600 price-tag">₹89</div>
             </div>
 
-            <div class="p-6 bg-gray-50 rounded-3xl border-2 border-gray-100 flex justify-between items-center hover:scale-[1.02] transition-transform">
-                <div class="text-left">
-                    <h2 class="text-3xl font-black uppercase leading-none">Fried Cheese Corn Momos</h2>
-                    <p class="text-lg font-bold text-gray-400 mt-1 uppercase">Crispy 8 Pieces</p>
-                </div>
-                <div class="text-4xl font-black text-indigo-600 price-tag">₹99</div>
-            </div>
-
-            <div class="p-6 bg-gray-50 rounded-3xl border-2 border-gray-100 flex justify-between items-center hover:scale-[1.02] transition-transform">
-                <div class="text-left">
-                    <h2 class="text-3xl font-black uppercase leading-none">Mini Samosas</h2>
-                    <p class="text-lg font-bold text-gray-400 mt-1 uppercase">Standard 8 Pieces</p>
-                </div>
+            <div class="p-6 bg-gray-50 rounded-3xl border-2 border-gray-100 flex justify-between items-center hover:scale-[1.01] transition-transform">
+                <div class="text-left"><h2 class="text-3xl font-black uppercase leading-none">Mini Samosas</h2><p class="text-lg font-bold text-gray-400 mt-1 uppercase">Standard 8 Pieces</p></div>
                 <div class="text-4xl font-black text-indigo-600 price-tag">₹79</div>
             </div>
 
-            <div class="p-6 bg-blue-50 rounded-3xl border-2 border-blue-200 flex justify-between items-center hover:scale-[1.02] transition-transform">
-                <div class="text-left">
-                    <h2 class="text-3xl font-black uppercase leading-none text-blue-900">French Fries</h2>
-                    <p class="text-xl font-black text-blue-500 mt-1 uppercase">Large 250g Serving</p>
-                </div>
+            <div class="p-6 bg-blue-50 rounded-3xl border-2 border-blue-200 flex justify-between items-center hover:scale-[1.01] transition-transform">
+                <div class="text-left"><h2 class="text-3xl font-black uppercase leading-none text-blue-900">French Fries</h2><p class="text-xl font-black text-blue-500 mt-1 uppercase">Large 250g Serving</p></div>
                 <div class="text-4xl font-black text-blue-600 price-tag">₹79</div>
             </div>
         </div>
 
-        <div class="mt-12 py-8 px-4 border-2 border-dashed border-gray-200 rounded-[2.5rem]">
-            <p class="text-gray-400 font-bold uppercase text-sm mb-2">Need something special?</p>
-            <h3 class="text-2xl font-black uppercase">For custom menu contact directly</h3>
+        <div class="mt-20">
+            <div class="flex items-center gap-4 justify-center mb-8">
+                <div class="h-[2px] bg-gray-200 flex-grow"></div>
+                <h3 class="text-2xl font-black uppercase tracking-widest text-gray-400">Other Frozen Items</h3>
+                <div class="h-[2px] bg-gray-200 flex-grow"></div>
+            </div>
+            
+            <p class="text-[10px] font-black uppercase tracking-widest mb-10 text-green-600">Partnered with Big Bee™ - Heat, Eat & Smile!</p>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div class="frozen-card p-6 rounded-[2rem] text-left">
+                    <h4 class="text-lg font-black uppercase mb-4 text-gray-900 border-b-2 border-gray-100 pb-2">Frozen Snacks</h4>
+                    <ul class="text-[11px] font-bold uppercase space-y-2 text-gray-500">
+                        <li>• Cheese Cigar Roll</li>
+                        <li>• Aloo Bada / Dosa Rolls</li>
+                        <li>• Cheese Corn Nuggets</li>
+                        <li>• Veg Burger Patties</li>
+                        <li>• Hara Bhara Kabab</li>
+                        <li>• Manchurian / Cheese Balls</li>
+                        <li>• Paneer & Veg Momos</li>
+                    </ul>
+                </div>
+
+                <div class="frozen-card p-6 rounded-[2rem] text-left">
+                    <h4 class="text-lg font-black uppercase mb-4 text-gray-900 border-b-2 border-gray-100 pb-2">Essentials</h4>
+                    <ul class="text-[11px] font-bold uppercase space-y-2 text-gray-500">
+                        <li class="text-green-600">NEW: Mix Veg / Sweet Corn</li>
+                        <li class="text-green-600">NEW: Green Peas</li>
+                        <li>• Dal Makhani</li>
+                        <li>• Pav Bhaji</li>
+                        <li>• Momos Chutney</li>
+                        <li>• Special Garlic Sauce</li>
+                    </ul>
+                </div>
+
+                <div class="frozen-card p-6 rounded-[2rem] text-left col-span-2">
+                    <h4 class="text-lg font-black uppercase mb-4 text-gray-900 border-b-2 border-gray-100 pb-2 text-center">Premium Fruit Pulps</h4>
+                    <div class="grid grid-cols-3 gap-2 text-[10px] font-black text-center text-gray-400">
+                        <div class="bg-gray-50 p-3 rounded-2xl">SITAFAL</div>
+                        <div class="bg-gray-50 p-3 rounded-2xl">MANGO PULP</div>
+                        <div class="bg-gray-50 p-3 rounded-2xl">STRAWBERRY</div>
+                        <div class="bg-gray-50 p-3 rounded-2xl">MANGO SLICES</div>
+                        <div class="bg-gray-50 p-3 rounded-2xl">MANGO DICES</div>
+                        <div class="bg-green-50 text-green-600 p-3 rounded-2xl">MORE...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-16 py-8 px-4 border-2 border-dashed border-gray-200 rounded-[2.5rem]">
+            <p class="text-gray-400 font-bold uppercase text-sm mb-2">Bulk or Custom Frozen Orders?</p>
+            <h3 class="text-2xl font-black uppercase">Connect directly for Frozen Items</h3>
         </div>
 
         <div class="mt-16 flex flex-col items-center gap-6">
             <button onclick="shareMenu()" class="bg-gray-900 text-white px-10 py-4 rounded-2xl font-black uppercase text-sm shadow-xl flex items-center gap-3 active:scale-95 transition-transform">
                 <span>📤 Share With Other 😋</span>
             </button>
-            
             <div class="bg-white p-4 rounded-3xl shadow-md border border-gray-100">
                 <canvas id="menuQR"></canvas>
-                <p class="text-[10px] font-black text-gray-400 uppercase mt-2 tracking-tighter">Scan to Share</p>
+                <p class="text-[10px] font-black text-gray-400 uppercase mt-2 tracking-tighter">Scan to Share Menu</p>
             </div>
         </div>
 
@@ -114,7 +155,6 @@
     </div>
 
     <script>
-        // Initialize QR Code
         window.onload = function() {
             new QRious({
                 element: document.getElementById('menuQR'),
@@ -124,7 +164,6 @@
             });
         };
 
-        // Native Web Share API
         async function shareMenu() {
             if (navigator.share) {
                 try {
@@ -133,9 +172,7 @@
                         text: 'Delivering Freshness and Speed !',
                         url: window.location.href
                     });
-                } catch (err) {
-                    console.log('Share cancelled');
-                }
+                } catch (err) { console.log('Share cancelled'); }
             } else {
                 alert('Copy this link to share: ' + window.location.href);
             }
