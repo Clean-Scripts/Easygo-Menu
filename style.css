@@ -1,0 +1,85 @@
+/* EasyGo Menu - Custom Styles */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+
+:root {
+    --primary-green: #10b981;
+    --primary-blue: #3b82f6;
+    --primary-purple: #8b5cf6;
+    --accent-amber: #f59e0b;
+    --dark-gray: #1f2937;
+    --light-gray: #f9fafb;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #ffffff;
+    color: #1a1a1a;
+    overflow-x: hidden;
+}
+
+/* Custom animations */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.floating {
+    animation: float 3s ease-in-out infinite;
+}
+
+.pulsing {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-green);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0da271;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+    .text-7xl {
+        font-size: 3.5rem;
+    }
+    
+    .text-3xl {
+        font-size: 1.75rem;
+    }
+    
+    .text-4xl {
+        font-size: 2rem;
+    }
+}
+
+/* Print styles */
+@media print {
+    .item-card, .frozen-card {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}
