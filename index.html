@@ -257,11 +257,11 @@
         <div class="space-y-4">
             <div>
                 <label class="text-[9px] font-black uppercase text-gray-400 ml-1">Your Name</label>
-                <input type="text" id="leadName" placeholder="Nishant Jaiswal" class="w-full border-b-2 py-2 outline-none focus:border-indigo-500 font-bold">
+                <input type="text" id="leadName" placeholder="Your Good Name Please !" class="w-full border-b-2 py-2 outline-none focus:border-indigo-500 font-bold">
             </div>
             <div>
                 <label class="text-[9px] font-black uppercase text-gray-400 ml-1">WhatsApp Number</label>
-                <input type="number" id="leadPhone" placeholder="91XXXXXXXX" class="w-full border-b-2 py-2 outline-none focus:border-indigo-500 font-bold">
+                <input type="number" id="leadPhone" placeholder="+91 XXXXX XXXXX" class="w-full border-b-2 py-2 outline-none focus:border-indigo-500 font-bold">
             </div>
         </div>
 
@@ -313,7 +313,7 @@ function submitLead() {
     const startTotalSec = (17 * 3600) + (45 * 60); // 17:45:00
     const endTotalSec = (22 * 3600) + (30 * 60);   // 22:30:00
 
-    istClock.innerText = `Current IST: ${istTime.toLocaleTimeString()}`;
+    istClock.innerText = `अभी का समय: ${istTime.toLocaleTimeString()}`;
 
     if (currentTotalSec >= startTotalSec && currentTotalSec <= endTotalSec) {
         // OPEN STATE
@@ -345,46 +345,91 @@ function submitLead() {
 setInterval(updateOrderingSystem, 1000);
 updateOrderingSystem();
 </script>
-            <div class="mt-4 flex flex-col items-center">
-                <p class="text-sm font-bold uppercase text-gray-600">📍 Visit Us</p>
-                <p class="text-xs font-medium text-gray-400 uppercase tracking-widest mt-1 text-center">114, Prime Square, Omaxe City 1, Indore</p>
+
+<div id="bugModal" class="fixed inset-0 bg-black/70 backdrop-blur-md hidden flex items-center justify-center z-[250] p-4">
+    <div class="bg-white rounded-[2.5rem] p-8 max-w-sm w-full shadow-2xl text-gray-900 border-2 border-red-50">
+        <div class="flex justify-between items-start mb-4">
+            <div>
+                <h2 class="text-2xl font-black uppercase tracking-tighter leading-none text-red-600">Report a Bug</h2>
+                <p class="text-[9px] font-bold text-gray-400 uppercase mt-2 tracking-widest">Help us fix Easy Go 🛠️</p>
+            </div>
+            <button onclick="closeBugModal()" class="text-gray-300 hover:text-red-500 font-black">✕</button>
+        </div>
+        
+        <div class="space-y-4">
+            <div>
+                <label class="text-[9px] font-black uppercase text-gray-400 ml-1">What Went Wrong ?</label>
+                <textarea id="bug_desc" placeholder="Explain the issue..." class="w-full border-2 border-gray-50 rounded-2xl p-4 outline-none focus:border-red-500 font-medium text-xs h-32 resize-none bg-gray-50/50"></textarea>
             </div>
         </div>
 
-        <div class="mt-16 flex flex-col items-center gap-6">
-            <button onclick="shareMenu()" class="bg-gray-900 text-white px-10 py-4 rounded-2xl font-black uppercase text-sm shadow-xl flex items-center gap-3 active:scale-95 transition-transform">
-                <span>📤 Share With Others📱 😋</span>
-            </button>
-            <div class="bg-white p-4 rounded-3xl shadow-md border border-gray-100">
-                <canvas id="menuQR"></canvas>
-                <p class="text-[10px] font-black text-gray-400 uppercase mt-2 tracking-tighter text-center">Share QR with Others</p>
-            </div>
-        </div>
+        <button onclick="submitBugReport()" class="w-full py-4 rounded-2xl bg-red-600 text-white font-black text-xs uppercase shadow-lg mt-6 hover:bg-red-700 transition-all flex items-center justify-center gap-2">
+            <span>🚀 Send Report</span>
+        </button>
+        
+        <p class="text-[7px] font-bold text-gray-300 text-center mt-4 uppercase tracking-widest">
+            Technical Specs will be Attached Automatically !
+        </p>
     </div>
+</div>
 
-    <script>
-        window.onload = function() {
-            new QRious({
-                element: document.getElementById('menuQR'),
-                value: window.location.href,
-                size: 160,
-                padding: 10
-            });
-        };
+<script>
+function openBugModal() {
+    document.getElementById('bugModal').classList.remove('hidden');
+}
 
-        async function shareMenu() {
-            if (navigator.share) {
-                try {
-                    await navigator.share({
-                        title: 'Easy Go | Menu',
-                        text: 'Delivering Freshness and Speed !',
-                        url: window.location.href
-                    });
-                } catch (err) { console.log('Share cancelled'); }
-            } else {
-                alert('Copy this link to share: ' + window.location.href);
-            }
-        }
-    </script>
+function closeBugModal() {
+    document.getElementById('bugModal').classList.add('hidden');
+}
+
+function getTechnicalSpecs() {
+    return {
+        browser: navigator.userAgent.split(') ')[1] || navigator.userAgent,
+        os: navigator.platform,
+        screen: `${window.screen.width}x${window.screen.height}`,
+        language: navigator.language,
+        time: new Date().toLocaleString(),
+        url: window.location.href,
+        cores: navigator.hardwareConcurrency || 'Unknown',
+        memory: navigator.deviceMemory ? `${navigator.deviceMemory}GB` : 'Unknown'
+    };
+}
+
+function submitBugReport() {
+    const desc = document.getElementById('bug_desc').value;
+    if (!desc) {
+        alert("Please tell us What Happened!");
+        return;
+    }
+
+    const specs = getTechnicalSpecs();
+    const waNumber = "917651837322";
+
+    // Formatting the message for a professional developer look
+    const message = 
+`*🛑 BUG REPORT @EASYGO*%0A
+---------------------------%0A
+*Issue:* ${desc}%0A
+---------------------------%0A
+*💻 DEVICE SPECS:*%0A
+• *OS:* ${specs.os}%0A
+• *Browser:* ${specs.browser}%0A
+• *Display:* ${specs.screen}%0A
+• *RAM:* ${specs.memory}%0A
+• *CPU Cores:* ${specs.cores}%0A
+• *Time:* ${specs.time}%0A
+• *URL:* ${specs.url}%0A
+---------------------------%0A
+_Sent from Easy Go Auto-Diagnostics_`;
+
+    // 1. Alert User
+    alert("Technical Log Generated! Hit 'Send' on WhatsApp to finish the Report. 🛠️");
+
+    // 2. Open WhatsApp with pre-filled technical data
+    const waUrl = `https://wa.me/${waNumber}?text=${message}`;
+    window.location.href = waUrl;
+}
+</script>
+            
 </body>
 </html>
