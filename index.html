@@ -9,7 +9,7 @@
     <title>Easy Go | Menu</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
-        body { font-family: 'Inter', sans-serif; background: #ffffff; color: #1a1a1a; }
+        body { font-family: 'Inter', sans-serif; background: #ffffff; color: #1a1a1a; min-height: 100vh; }
         .banner-clip { clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); }
         .price-tag { text-shadow: 1px 1px 0px #fff; }
         .frozen-card { border: 1px solid #e5e7eb; transition: all 0.2s; }
@@ -20,393 +20,455 @@
         50% { transform: translateY(-5px); }
             }
         .animate-bounce-short { animation: bounce-short 3s infinite; }
+        
+        /* Footer fix */
+        .main-content { min-height: calc(100vh - 200px); }
+        footer { margin-top: auto; }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased flex flex-col min-h-screen">
 
-    <header class="relative mb-8">
-        <div class="h-48 md:h-64 overflow-hidden banner-clip">
-            <img src="https://raw.githubusercontent.com/Clean-Scripts/EasyGo-Expense-Tracker/refs/heads/main/Banner.png" 
-                 class="w-full h-full object-cover" alt="Easy Go Banner">
+    <div class="main-content">
+        <header class="relative mb-8">
+            <div class="h-48 md:h-64 overflow-hidden banner-clip">
+                <img src="https://raw.githubusercontent.com/Clean-Scripts/EasyGo-Expense-Tracker/refs/heads/main/Banner.png" 
+                     class="w-full h-full object-cover" alt="Easy Go Banner">
+            </div>
+            <div class="absolute -bottom-6 left-0 right-0 flex justify-center">
+                <img src="https://raw.githubusercontent.com/Clean-Scripts/EasyGo-Expense-Tracker/refs/heads/main/logo.png" 
+                     class="h-32 w-32 rounded-full border-4 border-white shadow-xl bg-white p-1">
+            </div>
+        </header>
+
+        <div class="max-w-3xl mx-auto px-4 pt-10 pb-12 text-center">
+            <h1 class="text-7xl font-black tracking-tighter uppercase leading-none text-gray-900">Easy Go</h1>
+            <p class="text-gray-500 uppercase text-xs font-black tracking-[0.2em] mt-3 italic">Delivering Freshness and Speed !</p>
+
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+                <div class="p-5 bg-gray-900 text-white rounded-3xl flex flex-col justify-center">
+                    <p class="text-xs font-black text-green-400 uppercase tracking-widest mb-1">Our Credentials</p>
+                    <h3 class="text-lg font-bold leading-tight uppercase">MSME | FSSAI | GST Registered</h3>
+                    <p class="text-[10px] text-gray-400 mt-2 font-medium tracking-wide">Ensuring the highest standards of safety and professional service.</p>
+                </div>
+                <div class="p-5 bg-indigo-50 border-2 border-indigo-100 rounded-3xl flex flex-col justify-center">
+                    <p class="text-xs font-black text-indigo-600 uppercase tracking-widest mb-1">Commitment</p>
+                    <h3 class="text-lg font-bold text-gray-900 uppercase italic">Affordable Rates + Premium Quality.</h3>
+                    <p class="text-[10px] text-indigo-400 mt-2 font-black uppercase">Delivering Freshness & Speed!</p>
+                </div>
+            </div>
+
+            <div class="mt-8 p-6 bg-green-600 rounded-[2rem] text-white shadow-lg border-2 border-green-700">
+                <p class="text-xl font-black uppercase">🛵 Free Delivery @ Order (>) ₹199</p>
+                <p class="text-xs font-bold uppercase mt-1 opacity-90 tracking-widest text-center">Within 4 km from Prime Square</p>
+            </div>
+
+            <div class="mt-12 space-y-4">
+                <h3 class="text-xs font-black text-gray-400 uppercase tracking-[0.5em] mb-6">Hot & Fresh Snacks</h3>
+
+                <a href="https://clean-scripts.github.io/Easygo-Item/?item=veg-momos-steamed">
+                <div class="p-6 bg-gray-50 rounded-3xl border-2 border-gray-100 flex justify-between items-center hover:scale-[1.01] transition-transform">
+                    <div class="flex items-center gap-4 text-left">
+                        <img src="https://raw.githubusercontent.com/Clean-Scripts/Easygo-Menu/refs/heads/main/veg.png" alt="Veg Momos" class="h-16 w-16 object-contain">
+                        <div>
+                            <h2 class="text-3xl font-black uppercase leading-none">Veg Momos (Steamed)</h2>
+                            <p class="text-lg font-bold text-gray-400 mt-1 uppercase">Standard 8 Pieces</p>
+                        </div>
+                    </div>
+                    <div class="text-4xl font-black text-indigo-600 price-tag">₹59</div>
+                </div>
+                </a>
+
+                <a href="https://clean-scripts.github.io/Easygo-Item/?item=veg-momos-fried">
+                <div class="p-6 bg-amber-50 rounded-3xl border-2 border-amber-200 flex justify-between items-center relative overflow-hidden hover:scale-[1.01] transition-transform">
+                    <div class="flex items-center gap-4 text-left">
+                        <span class="absolute top-0 left-0 bg-amber-400 text-white text-[10px] font-black px-4 py-1 rounded-br-xl uppercase">Special</span>
+                        <img src="https://raw.githubusercontent.com/Clean-Scripts/Easygo-Menu/refs/heads/main/veg.png" alt="Veg Momos" class="h-16 w-16 object-contain pt-2">
+                        <div class="pt-2">
+                            <h2 class="text-3xl font-black uppercase leading-none">Veg Momos (Fried)</h2>
+                            <p class="text-lg font-bold text-amber-600/60 mt-1 uppercase">Crispy 8 Pieces</p>
+                        </div>
+                    </div>
+                    <div class="text-4xl font-black text-amber-600 price-tag">₹79</div>
+                </div>
+                </a>
+
+                <a href="https://clean-scripts.github.io/Easygo-Item/?item=cheese-corn-steamed">
+                <div class="p-6 bg-gray-50 rounded-3xl border-2 border-gray-100 flex justify-between items-center hover:scale-[1.01] transition-transform">
+                    <div class="flex items-center gap-4 text-left">
+                        <img src="https://raw.githubusercontent.com/Clean-Scripts/Easygo-Menu/refs/heads/main/cheese-corn.png" alt="Cheese Corn Momos" class="h-16 w-16 object-contain">
+                        <div>
+                            <h2 class="text-3xl font-black uppercase leading-none">Cheese Corn Momos (Steamed)</h2>
+                            <p class="text-lg font-bold text-gray-400 mt-1 uppercase">Standard 8 Pieces</p>
+                        </div>
+                    </div>
+                    <div class="text-4xl font-black text-indigo-600 price-tag">₹89</div>
+                </div>
+                </a>
+
+                <a href="https://clean-scripts.github.io/Easygo-Item/?item=cheese-corn-fried">
+                <div class="p-6 bg-gray-50 rounded-3xl border-2 border-gray-100 flex justify-between items-center hover:scale-[1.01] transition-transform">
+                    <div class="flex items-center gap-4 text-left">
+                        <img src="https://raw.githubusercontent.com/Clean-Scripts/Easygo-Menu/refs/heads/main/cheese-corn.png" alt="Cheese Corn Momos" class="h-16 w-16 object-contain">
+                        <div>
+                            <h2 class="text-3xl font-black uppercase leading-none">Cheese Corn Momos (Fried)</h2>
+                            <p class="text-lg font-bold text-gray-400 mt-1 uppercase">Crispy 8 Pieces</p>
+                        </div>
+                    </div>
+                    <div class="text-4xl font-black text-indigo-600 price-tag">₹99</div>
+                </div>
+                </a>
+
+                <a href="https://clean-scripts.github.io/Easygo-Item/?item=paneer-steamed">
+                <div class="p-6 bg-gray-50 rounded-3xl border-2 border-gray-100 flex justify-between items-center hover:scale-[1.01] transition-transform">
+                    <div class="flex items-center gap-4 text-left">
+                        <img src="https://raw.githubusercontent.com/Clean-Scripts/Easygo-Menu/refs/heads/main/paneer.png" alt="Paneer Momos" class="h-16 w-16 object-contain">
+                        <div>
+                            <h2 class="text-3xl font-black uppercase leading-none">Paneer Momos (Steamed)</h2>
+                            <p class="text-lg font-bold text-gray-400 mt-1 uppercase">Standard 8 Pieces</p>
+                        </div>
+                    </div>
+                    <div class="text-4xl font-black text-indigo-600 price-tag">₹79</div>
+                </div>
+                </a>
+
+                <a href="https://clean-scripts.github.io/Easygo-Item/?item=paneer-fried">
+                <div class="p-6 bg-gray-50 rounded-3xl border-2 border-gray-100 flex justify-between items-center hover:scale-[1.01] transition-transform">
+                    <div class="flex items-center gap-4 text-left">
+                        <img src="https://raw.githubusercontent.com/Clean-Scripts/Easygo-Menu/refs/heads/main/paneer.png" alt="Paneer Momos" class="h-16 w-16 object-contain">
+                        <div>
+                            <h2 class="text-3xl font-black uppercase leading-none">Paneer Momos (Fried)</h2>
+                            <p class="text-lg font-bold text-gray-400 mt-1 uppercase">Crispy 8 Pieces</p>
+                        </div>
+                    </div>
+                    <div class="text-4xl font-black text-indigo-600 price-tag">₹89</div>
+                </div>
+                </a>
+
+                <a href="https://clean-scripts.github.io/Easygo-Item/?item=mini-samosas">
+                <div class="p-6 bg-gray-50 rounded-3xl border-2 border-gray-100 flex justify-between items-center hover:scale-[1.01] transition-transform">
+                    <div class="flex items-center gap-4 text-left">
+                        <img src="https://raw.githubusercontent.com/Clean-Scripts/Easygo-Menu/refs/heads/main/samosas.png" alt="Mini Samosas" class="h-16 w-16 object-contain">
+                        <div>
+                            <h2 class="text-3xl font-black uppercase leading-none">Mini Samosas</h2>
+                            <p class="text-lg font-bold text-gray-400 mt-1 uppercase">Standard 8 Pieces</p>
+                        </div>
+                    </div>
+                    <div class="text-4xl font-black text-indigo-600 price-tag">₹69</div>
+                </div>
+                </a>
+
+                <a href="https://clean-scripts.github.io/Easygo-Item/?item=french-fries">
+                <div class="p-6 bg-blue-50 rounded-3xl border-2 border-blue-200 flex justify-between items-center hover:scale-[1.01] transition-transform">
+                    <div class="flex items-center gap-4 text-left">
+                        <img src="https://raw.githubusercontent.com/Clean-Scripts/Easygo-Menu/refs/heads/main/fries.png" alt="French Fries" class="h-16 w-16 object-contain">
+                        <div>
+                            <h2 class="text-3xl font-black uppercase leading-none text-blue-900">French Fries</h2>
+                            <p class="text-xl font-black text-blue-500 mt-1 uppercase">Serving: (200g)</p>
+                        </div>
+                    </div>
+                    <div class="text-4xl font-black text-blue-600 price-tag">₹69</div>
+                </div>
+                </a>
+            </div>
+
+            <div class="mt-20">
+                <div class="flex items-center gap-4 justify-center mb-8">
+                    <div class="h-[2px] bg-gray-200 flex-grow"></div>
+                    <h3 class="text-2xl font-black uppercase tracking-widest text-gray-400">Other Items</h3>
+                    <div class="h-[2px] bg-gray-200 flex-grow"></div>
+                </div>
+                
+                <p class="text-[10px] font-black uppercase tracking-widest mb-10 text-green-600 text-center">Partnered with US™ - Heat, Eat & Smile!</p>
+
+                <div class="grid grid-cols-2 gap-4 text-center">
+                    <div class="frozen-card p-6 rounded-[2rem] text-left">
+                        <h4 class="text-lg font-black uppercase mb-4 text-gray-900 border-b-2 border-gray-100 pb-2">Ready To Go Snacks</h4>
+                        <ul class="text-[11px] font-bold uppercase space-y-2 text-gray-500">
+                            <li class="text-green-600">Cheese Cigar Roll</li>
+                            <li class="text-green-600">Dosa Rolls</li>
+                            <li class="text-green-600">Cheese Corn Nuggets</li>
+                            <li class="text-green-600">Veg Burger Patties</li>
+                            <li class="text-green-600">Hara Bhara Kabab</li>
+                            <li class="text-green-600">Cheese Balls</li>
+                        </ul>
+                    </div>
+
+                    <div class="frozen-card p-6 rounded-[2rem] text-left">
+                        <h4 class="text-lg font-black uppercase mb-4 text-gray-900 border-b-2 border-gray-100 pb-2">Other Essentials</h4>
+                        <ul class="text-[11px] font-bold uppercase space-y-2 text-gray-500">
+                            <li class="text-green-600">Mix Veg / Sweet Corn</li>
+                            <li class="text-green-600">Green Peas</li>
+                            <li class="text-green-600">Dal Makhani</li>
+                            <li class="text-green-600">Pav Bhaji</li>
+                            <li class="text-green-600">Special Garlic Sauce</li>
+                        </ul>
+                    </div>
+
+                    <div class="frozen-card p-6 rounded-[2rem] text-left col-span-2">
+                        <h4 class="text-lg font-black uppercase mb-4 text-gray-900 border-b-2 border-gray-100 pb-2 text-center">Premium Fruit Pulps</h4>
+                        <div class="grid grid-cols-3 gap-2 text-[10px] font-black text-center text-gray-400">
+                            <div class="bg-gray-50 p-3 rounded-2xl">SITAFAL</div>
+                            <div class="bg-gray-50 p-3 rounded-2xl">MANGO PULP</div>
+                            <div class="bg-gray-50 p-3 rounded-2xl">STRAWBERRY</div>
+                            <div class="bg-gray-50 p-3 rounded-2xl">MANGO SLICES</div>
+                            <div class="bg-gray-50 p-3 rounded-2xl">MANGO DICES</div>
+                            <div class="bg-green-50 text-green-600 p-3 rounded-2xl">MORE...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-16 py-8 px-4 border-2 border-dashed border-gray-200 rounded-[2.5rem]">
+                <p class="text-gray-400 font-bold uppercase text-sm mb-2">Bulk/ Custom Orders?</p>
+                <h3 class="text-2xl font-black uppercase">Connect Directly 📞</h3>
+            </div>
+
+            <div class="mt-16 pt-10 border-t-4 border-gray-900 flex flex-col items-center gap-2">
+            <div class="mt-8 flex flex-col items-center gap-6 p-8 bg-white/50 backdrop-blur-md rounded-[2.5rem] border border-gray-100 shadow-inner">
+        
+        <div id="statusContainer" class="text-center space-y-2">
+            <p id="timeStatus" class="text-sm font-black uppercase tracking-widest transition-all duration-500">
+                </p>
+            <div id="countdownDisplay" class="text-4xl font-black text-gray-900 tracking-tighter hidden">
+                00:00:00
+            </div>
         </div>
-        <div class="absolute -bottom-6 left-0 right-0 flex justify-center">
-            <img src="https://raw.githubusercontent.com/Clean-Scripts/EasyGo-Expense-Tracker/refs/heads/main/logo.png" 
-                 class="h-32 w-32 rounded-full border-4 border-white shadow-xl bg-white p-1">
-        </div>
-    </header>
 
-    <div class="max-w-3xl mx-auto px-4 pt-10 pb-20 text-center">
-        <h1 class="text-7xl font-black tracking-tighter uppercase leading-none text-gray-900">Easy Go</h1>
-        <p class="text-gray-500 uppercase text-xs font-black tracking-[0.2em] mt-3 italic">Delivering Freshness and Speed !</p>
+        <button id="placeOrderBtn" 
+                class="w-full max-w-md py-5 rounded-[2rem] text-2xl font-black uppercase tracking-tighter shadow-2xl transition-all duration-500 transform">
+            🚀 Place Order
+        </button>
 
-        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
-            <div class="p-5 bg-gray-900 text-white rounded-3xl flex flex-col justify-center">
-                <p class="text-xs font-black text-green-400 uppercase tracking-widest mb-1">Our Credentials</p>
-                <h3 class="text-lg font-bold leading-tight uppercase">MSME | FSSAI | GST Registered</h3>
-                <p class="text-[10px] text-gray-400 mt-2 font-medium tracking-wide">Ensuring the highest standards of safety and professional service.</p>
-            </div>
-            <div class="p-5 bg-indigo-50 border-2 border-indigo-100 rounded-3xl flex flex-col justify-center">
-                <p class="text-xs font-black text-indigo-600 uppercase tracking-widest mb-1">Commitment</p>
-                <h3 class="text-lg font-bold text-gray-900 uppercase italic">Affordable Rates + Premium Quality.</h3>
-                <p class="text-[10px] text-indigo-400 mt-2 font-black uppercase">Delivering Freshness & Speed!</p>
-            </div>
+        <div id="notifySection" class="hidden w-full max-w-md p-6 bg-amber-50 rounded-3xl border border-amber-100 text-center animate-bounce-short">
+            <p class="text-[10px] font-black text-amber-600 uppercase tracking-widest mb-3">Don't miss the first batch! 🥟</p>
+            <button onclick="openNotifyModal()" class="w-full py-3 bg-amber-500 text-white rounded-2xl font-black uppercase text-xs shadow-md hover:bg-amber-600 transition-all">
+                🔔 Notify Me When Open
+            </button>
         </div>
 
-        <div class="mt-8 p-6 bg-green-600 rounded-[2rem] text-white shadow-lg border-2 border-green-700">
-            <p class="text-xl font-black uppercase">🛵 Free Delivery @ Order (>) ₹199</p>
-            <p class="text-xs font-bold uppercase mt-1 opacity-90 tracking-widest text-center">Within 4 km from Prime Square</p>
+        <div class="flex flex-col items-center gap-1">
+            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                🕒 Daily Service: 05:45 PM — 10:30 PM
+            </p>
+            <p id="liveIST" class="text-[9px] font-medium text-indigo-300 uppercase italic"></p>
         </div>
-
-        <div class="mt-12 space-y-4">
-            <h3 class="text-xs font-black text-gray-400 uppercase tracking-[0.5em] mb-6">Hot & Fresh Snacks</h3>
-
-            <a href="https://clean-scripts.github.io/Easygo-Item/?item=veg-momos-steamed">
-            <div class="p-6 bg-gray-50 rounded-3xl border-2 border-gray-100 flex justify-between items-center hover:scale-[1.01] transition-transform">
-                <div class="flex items-center gap-4 text-left">
-                    <img src="https://raw.githubusercontent.com/Clean-Scripts/EasyGo-Expense-Tracker/refs/heads/main/veg.png" alt="Veg Momos" class="h-16 w-16 object-contain">
-                    <div>
-                        <h2 class="text-3xl font-black uppercase leading-none">Veg Momos (Steamed)</h2>
-                        <p class="text-lg font-bold text-gray-400 mt-1 uppercase">Standard 8 Pieces</p>
-                    </div>
-                </div>
-                <div class="text-4xl font-black text-indigo-600 price-tag">₹59</div>
-            </div>
-            </a>
-
-            <a href="https://clean-scripts.github.io/Easygo-Item/?item=veg-momos-fried">
-            <div class="p-6 bg-amber-50 rounded-3xl border-2 border-amber-200 flex justify-between items-center relative overflow-hidden hover:scale-[1.01] transition-transform">
-                <div class="flex items-center gap-4 text-left">
-                    <span class="absolute top-0 left-0 bg-amber-400 text-white text-[10px] font-black px-4 py-1 rounded-br-xl uppercase">Special</span>
-                    <img src="https://raw.githubusercontent.com/Clean-Scripts/EasyGo-Expense-Tracker/refs/heads/main/veg.png" alt="Veg Momos" class="h-16 w-16 object-contain pt-2">
-                    <div class="pt-2">
-                        <h2 class="text-3xl font-black uppercase leading-none">Veg Momos (Fried)</h2>
-                        <p class="text-lg font-bold text-amber-600/60 mt-1 uppercase">Crispy 8 Pieces</p>
-                    </div>
-                </div>
-                <div class="text-4xl font-black text-amber-600 price-tag">₹79</div>
-            </div>
-            </a>
-
-            <a href="https://clean-scripts.github.io/Easygo-Item/?item=cheese-corn-steamed">
-            <div class="p-6 bg-gray-50 rounded-3xl border-2 border-gray-100 flex justify-between items-center hover:scale-[1.01] transition-transform">
-                <div class="flex items-center gap-4 text-left">
-                    <img src="https://raw.githubusercontent.com/Clean-Scripts/EasyGo-Expense-Tracker/refs/heads/main/cheese-corn.png" alt="Cheese Corn Momos" class="h-16 w-16 object-contain">
-                    <div>
-                        <h2 class="text-3xl font-black uppercase leading-none">Cheese Corn Momos (Steamed)</h2>
-                        <p class="text-lg font-bold text-gray-400 mt-1 uppercase">Standard 8 Pieces</p>
-                    </div>
-                </div>
-                <div class="text-4xl font-black text-indigo-600 price-tag">₹89</div>
-            </div>
-            </a>
-
-            <a href="https://clean-scripts.github.io/Easygo-Item/?item=cheese-corn-fried">
-            <div class="p-6 bg-gray-50 rounded-3xl border-2 border-gray-100 flex justify-between items-center hover:scale-[1.01] transition-transform">
-                <div class="flex items-center gap-4 text-left">
-                    <img src="https://raw.githubusercontent.com/Clean-Scripts/EasyGo-Expense-Tracker/refs/heads/main/cheese-corn.png" alt="Cheese Corn Momos" class="h-16 w-16 object-contain">
-                    <div>
-                        <h2 class="text-3xl font-black uppercase leading-none">Cheese Corn Momos (Fried)</h2>
-                        <p class="text-lg font-bold text-gray-400 mt-1 uppercase">Crispy 8 Pieces</p>
-                    </div>
-                </div>
-                <div class="text-4xl font-black text-indigo-600 price-tag">₹99</div>
-            </div>
-            </a>
-
-            <a href="https://clean-scripts.github.io/Easygo-Item/?item=paneer-steamed">
-            <div class="p-6 bg-gray-50 rounded-3xl border-2 border-gray-100 flex justify-between items-center hover:scale-[1.01] transition-transform">
-                <div class="flex items-center gap-4 text-left">
-                    <img src="https://raw.githubusercontent.com/Clean-Scripts/EasyGo-Expense-Tracker/refs/heads/main/paneer.png" alt="Paneer Momos" class="h-16 w-16 object-contain">
-                    <div>
-                        <h2 class="text-3xl font-black uppercase leading-none">Paneer Momos (Steamed)</h2>
-                        <p class="text-lg font-bold text-gray-400 mt-1 uppercase">Standard 8 Pieces</p>
-                    </div>
-                </div>
-                <div class="text-4xl font-black text-indigo-600 price-tag">₹79</div>
-            </div>
-            </a>
-
-            <a href="https://clean-scripts.github.io/Easygo-Item/?item=paneer-fried">
-            <div class="p-6 bg-gray-50 rounded-3xl border-2 border-gray-100 flex justify-between items-center hover:scale-[1.01] transition-transform">
-                <div class="flex items-center gap-4 text-left">
-                    <img src="https://raw.githubusercontent.com/Clean-Scripts/EasyGo-Expense-Tracker/refs/heads/main/paneer.png" alt="Paneer Momos" class="h-16 w-16 object-contain">
-                    <div>
-                        <h2 class="text-3xl font-black uppercase leading-none">Paneer Momos (Fried)</h2>
-                        <p class="text-lg font-bold text-gray-400 mt-1 uppercase">Crispy 8 Pieces</p>
-                    </div>
-                </div>
-                <div class="text-4xl font-black text-indigo-600 price-tag">₹89</div>
-            </div>
-            </a>
-
-            <a href="https://clean-scripts.github.io/Easygo-Item/?item=mini-samosas">
-            <div class="p-6 bg-gray-50 rounded-3xl border-2 border-gray-100 flex justify-between items-center hover:scale-[1.01] transition-transform">
-                <div class="flex items-center gap-4 text-left">
-                    <img src="https://raw.githubusercontent.com/Clean-Scripts/EasyGo-Expense-Tracker/refs/heads/main/samosas.png" alt="Mini Samosas" class="h-16 w-16 object-contain">
-                    <div>
-                        <h2 class="text-3xl font-black uppercase leading-none">Mini Samosas</h2>
-                        <p class="text-lg font-bold text-gray-400 mt-1 uppercase">Standard 8 Pieces</p>
-                    </div>
-                </div>
-                <div class="text-4xl font-black text-indigo-600 price-tag">₹69</div>
-            </div>
-            </a>
-
-            <a href="https://clean-scripts.github.io/Easygo-Item/?item=french-fries">
-            <div class="p-6 bg-blue-50 rounded-3xl border-2 border-blue-200 flex justify-between items-center hover:scale-[1.01] transition-transform">
-                <div class="flex items-center gap-4 text-left">
-                    <img src="https://raw.githubusercontent.com/Clean-Scripts/EasyGo-Expense-Tracker/refs/heads/main/fries.png" alt="French Fries" class="h-16 w-16 object-contain">
-                    <div>
-                        <h2 class="text-3xl font-black uppercase leading-none text-blue-900">French Fries</h2>
-                        <p class="text-xl font-black text-blue-500 mt-1 uppercase">Serving: (200g)</p>
-                    </div>
-                </div>
-                <div class="text-4xl font-black text-blue-600 price-tag">₹69</div>
-            </div>
-            </a>
+    </div>
         </div>
+    </div>
 
-        <div class="mt-20">
-            <div class="flex items-center gap-4 justify-center mb-8">
-                <div class="h-[2px] bg-gray-200 flex-grow"></div>
-                <h3 class="text-2xl font-black uppercase tracking-widest text-gray-400">Other Items</h3>
-                <div class="h-[2px] bg-gray-200 flex-grow"></div>
+    <!-- Footer -->
+    <footer class="py-8 bg-gray-50 mt-auto border-t border-gray-200">
+        <div class="max-w-3xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="text-center md:text-left">
+                    <div class="flex items-center justify-center md:justify-start gap-3">
+                        <img src="https://raw.githubusercontent.com/Clean-Scripts/EasyGo-Expense-Tracker/refs/heads/main/logo.png" 
+                             class="h-10 w-10 rounded-full border-2 border-white shadow">
+                        <div>
+                            <h3 class="text-lg font-black uppercase tracking-tight">Easy Go</h3>
+                            <p class="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Freshness & Speed Delivered</p>
+                        </div>
+                    </div>
+                    <p class="text-[10px] font-medium text-gray-500 mt-4 max-w-md">
+                        MSME | FSSAI | GST Registered • Free Delivery above ₹199 • Serving daily from 5:45 PM to 10:30 PM
+                    </p>
+                </div>
+                
+                <div class="flex flex-col items-center gap-3">
+                    <div class="flex gap-4">
+                        <a href="https://wa.me/917651837322" target="_blank" 
+                           class="bg-green-500 text-white p-3 rounded-2xl shadow-lg hover:bg-green-600 transition-all">
+                            <span class="font-black text-xs uppercase">WhatsApp</span>
+                        </a>
+                        <button onclick="openBugModal()" 
+                                class="bg-red-500 text-white p-3 rounded-2xl shadow-lg hover:bg-red-600 transition-all">
+                            <span class="font-black text-xs uppercase">Report Bug</span>
+                        </button>
+                    </div>
+                    <p class="text-[8px] font-bold text-gray-400 uppercase tracking-widest text-center">
+                        © 2024 Easy Go • All Rights Reserved
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification Modal -->
+    <div id="notifyModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center z-[100] p-4">
+        <div class="bg-white rounded-[2.5rem] p-8 max-w-sm w-full shadow-2xl text-gray-900">
+            <h2 class="text-2xl font-black mb-2 uppercase tracking-tighter">Get Notified! 📢</h2>
+            <p class="text-xs font-medium text-gray-500 mb-6">We'll send you a WhatsApp message when we're open and ready to serve!</p>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="text-[9px] font-black uppercase text-gray-400 ml-1">Your Name</label>
+                    <input type="text" id="leadName" placeholder="Your Good Name Please !" class="w-full border-b-2 py-2 outline-none focus:border-indigo-500 font-bold">
+                </div>
+                <div>
+                    <label class="text-[9px] font-black uppercase text-gray-400 ml-1">WhatsApp Number</label>
+                    <input type="tel" id="leadPhone" placeholder="+91 XXXXX XXXXX" class="w-full border-b-2 py-2 outline-none focus:border-indigo-500 font-bold">
+                </div>
+            </div>
+
+            <div class="flex gap-3 mt-8">
+                <button onclick="closeNotifyModal()" class="flex-1 py-3 rounded-xl bg-gray-50 font-black text-[10px] uppercase text-gray-400 hover:bg-gray-100">Cancel</button>
+                <button onclick="sendWhatsAppNotification()" class="flex-1 py-3 rounded-xl bg-green-600 text-white font-black text-[10px] uppercase shadow-lg hover:bg-green-700">Send WhatsApp</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bug Report Modal -->
+    <div id="bugModal" class="fixed inset-0 bg-black/70 backdrop-blur-md hidden flex items-center justify-center z-[250] p-4">
+        <div class="bg-white rounded-[2.5rem] p-8 max-w-sm w-full shadow-2xl text-gray-900 border-2 border-red-50">
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <h2 class="text-2xl font-black uppercase tracking-tighter leading-none text-red-600">Report a Bug</h2>
+                    <p class="text-[9px] font-bold text-gray-400 uppercase mt-2 tracking-widest">Help us fix Easy Go 🛠️</p>
+                </div>
+                <button onclick="closeBugModal()" class="text-gray-300 hover:text-red-500 font-black">✕</button>
             </div>
             
-            <p class="text-[10px] font-black uppercase tracking-widest mb-10 text-green-600 text-center">Partnered with US™ - Heat, Eat & Smile!</p>
-
-            <div class="grid grid-cols-2 gap-4 text-center">
-                <div class="frozen-card p-6 rounded-[2rem] text-left">
-                    <h4 class="text-lg font-black uppercase mb-4 text-gray-900 border-b-2 border-gray-100 pb-2">Ready To Go Snacks</h4>
-                    <ul class="text-[11px] font-bold uppercase space-y-2 text-gray-500">
-                        <li class="text-green-600">Cheese Cigar Roll</li>
-                        <li class="text-green-600">Dosa Rolls</li>
-                        <li class="text-green-600">Cheese Corn Nuggets</li>
-                        <li class="text-green-600">Veg Burger Patties</li>
-                        <li class="text-green-600">Hara Bhara Kabab</li>
-                        <li class="text-green-600">Cheese Balls</li>
-                    </ul>
-                </div>
-
-                <div class="frozen-card p-6 rounded-[2rem] text-left">
-                    <h4 class="text-lg font-black uppercase mb-4 text-gray-900 border-b-2 border-gray-100 pb-2">Other Essentials</h4>
-                    <ul class="text-[11px] font-bold uppercase space-y-2 text-gray-500">
-                        <li class="text-green-600">Mix Veg / Sweet Corn</li>
-                        <li class="text-green-600">Green Peas</li>
-                        <li class="text-green-600">Dal Makhani</li>
-                        <li class="text-green-600">Pav Bhaji</li>
-                        <li class="text-green-600">Special Garlic Sauce</li>
-                    </ul>
-                </div>
-
-                <div class="frozen-card p-6 rounded-[2rem] text-left col-span-2">
-                    <h4 class="text-lg font-black uppercase mb-4 text-gray-900 border-b-2 border-gray-100 pb-2 text-center">Premium Fruit Pulps</h4>
-                    <div class="grid grid-cols-3 gap-2 text-[10px] font-black text-center text-gray-400">
-                        <div class="bg-gray-50 p-3 rounded-2xl">SITAFAL</div>
-                        <div class="bg-gray-50 p-3 rounded-2xl">MANGO PULP</div>
-                        <div class="bg-gray-50 p-3 rounded-2xl">STRAWBERRY</div>
-                        <div class="bg-gray-50 p-3 rounded-2xl">MANGO SLICES</div>
-                        <div class="bg-gray-50 p-3 rounded-2xl">MANGO DICES</div>
-                        <div class="bg-green-50 text-green-600 p-3 rounded-2xl">MORE...</div>
-                    </div>
+            <div class="space-y-4">
+                <div>
+                    <label class="text-[9px] font-black uppercase text-gray-400 ml-1">What Went Wrong ?</label>
+                    <textarea id="bug_desc" placeholder="Explain the issue..." class="w-full border-2 border-gray-50 rounded-2xl p-4 outline-none focus:border-red-500 font-medium text-xs h-32 resize-none bg-gray-50/50"></textarea>
                 </div>
             </div>
-        </div>
 
-        <div class="mt-16 py-8 px-4 border-2 border-dashed border-gray-200 rounded-[2.5rem]">
-            <p class="text-gray-400 font-bold uppercase text-sm mb-2">Bulk/ Custom Orders?</p>
-            <h3 class="text-2xl font-black uppercase">Connect Directly 📞</h3>
-        </div>
-
-        <div class="mt-16 pt-10 border-t-4 border-gray-900 flex flex-col items-center gap-2">
-        <div class="mt-8 flex flex-col items-center gap-6 p-8 bg-white/50 backdrop-blur-md rounded-[2.5rem] border border-gray-100 shadow-inner">
-    
-    <div id="statusContainer" class="text-center space-y-2">
-        <p id="timeStatus" class="text-sm font-black uppercase tracking-widest transition-all duration-500">
+            <button onclick="submitBugReport()" class="w-full py-4 rounded-2xl bg-red-600 text-white font-black text-xs uppercase shadow-lg mt-6 hover:bg-red-700 transition-all flex items-center justify-center gap-2">
+                <span>🚀 Send Report</span>
+            </button>
+            
+            <p class="text-[7px] font-bold text-gray-300 text-center mt-4 uppercase tracking-widest">
+                Technical Specs will be Attached Automatically !
             </p>
-        <div id="countdownDisplay" class="text-4xl font-black text-gray-900 tracking-tighter hidden">
-            00:00:00
         </div>
     </div>
 
-    <button id="placeOrderBtn" 
-            class="w-full max-w-md py-5 rounded-[2rem] text-2xl font-black uppercase tracking-tighter shadow-2xl transition-all duration-500 transform">
-        🚀 Place Order
-    </button>
-
-    <div id="notifySection" class="hidden w-full max-w-md p-6 bg-amber-50 rounded-3xl border border-amber-100 text-center animate-bounce-short">
-        <p class="text-[10px] font-black text-amber-600 uppercase tracking-widest mb-3">Don't miss the first batch! 🥟</p>
-        <button onclick="openNotifyModal()" class="w-full py-3 bg-amber-500 text-white rounded-2xl font-black uppercase text-xs shadow-md hover:bg-amber-600 transition-all">
-            🔔 Notify Me When Open
-        </button>
-    </div>
-
-    <div class="flex flex-col items-center gap-1">
-        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-            🕒 Daily Service: 05:45 PM — 10:30 PM
-        </p>
-        <p id="liveIST" class="text-[9px] font-medium text-indigo-300 uppercase italic"></p>
-    </div>
-</div>
-
-<div id="notifyModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center z-[100] p-4">
-    <div class="bg-white rounded-[2.5rem] p-8 max-w-sm w-full shadow-2xl text-gray-900">
-        <h2 class="text-2xl font-black mb-2 uppercase tracking-tighter">Get Notified! 📢</h2>
-        <p class="text-xs font-medium text-gray-500 mb-6">We'll ping you on WhatsApp the moment Fresh Momos are ready.</p>
-        
-        <div class="space-y-4">
-            <div>
-                <label class="text-[9px] font-black uppercase text-gray-400 ml-1">Your Name</label>
-                <input type="text" id="leadName" placeholder="Your Good Name Please !" class="w-full border-b-2 py-2 outline-none focus:border-indigo-500 font-bold">
-            </div>
-            <div>
-                <label class="text-[9px] font-black uppercase text-gray-400 ml-1">WhatsApp Number</label>
-                <input type="number" id="leadPhone" placeholder="+91 XXXXX XXXXX" class="w-full border-b-2 py-2 outline-none focus:border-indigo-500 font-bold">
-            </div>
-        </div>
-
-        <div class="flex gap-3 mt-8">
-            <button onclick="closeNotifyModal()" class="flex-1 py-3 rounded-xl bg-gray-50 font-black text-[10px] uppercase text-gray-400">Cancel</button>
-            <button onclick="submitLead()" class="flex-1 py-3 rounded-xl bg-indigo-600 text-white font-black text-[10px] uppercase shadow-lg">Remind Me!</button>
-        </div>
-    </div>
-</div>
-
-<script>
-// Logic to handle Leads (Integration with your Master DB)
-function openNotifyModal() { document.getElementById('notifyModal').classList.remove('hidden'); }
-function closeNotifyModal() { document.getElementById('notifyModal').classList.add('hidden'); }
-
-function submitLead() {
-    const name = document.getElementById('leadName').value;
-    const phone = document.getElementById('leadPhone').value;
-
-    if(name && phone) {
-        // Logic to push to your db object (Assuming 'db' exists from previous Master Build)
-        if(!db.leads) db.leads = [];
-        db.leads.push({
-            name: name,
-            phone: phone,
-            time: new Date().toLocaleString(),
-            status: 'Pending'
-        });
-
-        alert(`Thanks ${name}! We've added you to the list. 🥟`);
-        closeNotifyModal();
-        cloudSync('save'); 
-    } else {
-        alert("Please fill both details!");
-    }
-}
-
+    <script>
+    // Time-based ordering system
     function updateOrderingSystem() {
-    const orderBtn = document.getElementById('placeOrderBtn');
-    const statusMsg = document.getElementById('timeStatus');
-    const countdownDiv = document.getElementById('countdownDisplay');
-    const notifyBox = document.getElementById('notifySection');
-    const istClock = document.getElementById('liveIST');
-    
-    const now = new Date();
-    const istTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Kolkata"}));
-    
-    const currentTotalSec = (istTime.getHours() * 3600) + (istTime.getMinutes() * 60) + istTime.getSeconds();
-    const startTotalSec = (17 * 3600) + (45 * 60); // 17:45:00
-    const endTotalSec = (22 * 3600) + (30 * 60);   // 22:30:00
-
-    istClock.innerText = `अभी का समय: ${istTime.toLocaleTimeString()}`;
-
-    if (currentTotalSec >= startTotalSec && currentTotalSec <= endTotalSec) {
-        // OPEN STATE
-        notifyBox.classList.add('hidden');
-        countdownDiv.classList.add('hidden');
-        statusMsg.innerHTML = "✨ We are LIVE! The kitchen is hot! 🔥";
-        statusMsg.className = "text-green-500 text-sm font-black uppercase tracking-widest";
-        orderBtn.classList.add('bg-indigo-600', 'text-white', 'hover:scale-105');
-        orderBtn.disabled = false;
-        orderBtn.onclick = () => window.location.href = "https://clean-scripts.github.io/Easygo-Items/";
-    } else {
-        // CLOSED STATE
-        notifyBox.classList.remove('hidden');
-        orderBtn.disabled = true;
-        orderBtn.classList.add('bg-gray-200', 'text-gray-400', 'opacity-50');
-
-        let secondsLeft = (currentTotalSec < startTotalSec) ? (startTotalSec - currentTotalSec) : ((86400 - currentTotalSec) + startTotalSec);
-        const h = Math.floor(secondsLeft / 3600);
-        const m = Math.floor((secondsLeft % 3600) / 60);
-        const s = secondsLeft % 60;
-
-        countdownDiv.classList.remove('hidden');
-        countdownDiv.innerText = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
-        statusMsg.innerHTML = (h === 0 && m < 30) ? "🤤 Almost there! Prepping fresh batches... ♨️" : "😴 We are resting. Opening in... ⏳";
-        statusMsg.className = (h === 0 && m < 30) ? "text-orange-500 text-sm font-black uppercase tracking-widest" : "text-red-500 text-sm font-black uppercase tracking-widest";
-    }
-}
-
-setInterval(updateOrderingSystem, 1000);
-updateOrderingSystem();
-</script>
-
-<div id="bugModal" class="fixed inset-0 bg-black/70 backdrop-blur-md hidden flex items-center justify-center z-[250] p-4">
-    <div class="bg-white rounded-[2.5rem] p-8 max-w-sm w-full shadow-2xl text-gray-900 border-2 border-red-50">
-        <div class="flex justify-between items-start mb-4">
-            <div>
-                <h2 class="text-2xl font-black uppercase tracking-tighter leading-none text-red-600">Report a Bug</h2>
-                <p class="text-[9px] font-bold text-gray-400 uppercase mt-2 tracking-widest">Help us fix Easy Go 🛠️</p>
-            </div>
-            <button onclick="closeBugModal()" class="text-gray-300 hover:text-red-500 font-black">✕</button>
-        </div>
+        const orderBtn = document.getElementById('placeOrderBtn');
+        const statusMsg = document.getElementById('timeStatus');
+        const countdownDiv = document.getElementById('countdownDisplay');
+        const notifyBox = document.getElementById('notifySection');
+        const istClock = document.getElementById('liveIST');
         
-        <div class="space-y-4">
-            <div>
-                <label class="text-[9px] font-black uppercase text-gray-400 ml-1">What Went Wrong ?</label>
-                <textarea id="bug_desc" placeholder="Explain the issue..." class="w-full border-2 border-gray-50 rounded-2xl p-4 outline-none focus:border-red-500 font-medium text-xs h-32 resize-none bg-gray-50/50"></textarea>
-            </div>
-        </div>
-
-        <button onclick="submitBugReport()" class="w-full py-4 rounded-2xl bg-red-600 text-white font-black text-xs uppercase shadow-lg mt-6 hover:bg-red-700 transition-all flex items-center justify-center gap-2">
-            <span>🚀 Send Report</span>
-        </button>
+        const now = new Date();
+        const istTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Kolkata"}));
         
-        <p class="text-[7px] font-bold text-gray-300 text-center mt-4 uppercase tracking-widest">
-            Technical Specs will be Attached Automatically !
-        </p>
-    </div>
-</div>
+        const currentTotalSec = (istTime.getHours() * 3600) + (istTime.getMinutes() * 60) + istTime.getSeconds();
+        const startTotalSec = (17 * 3600) + (45 * 60); // 17:45:00
+        const endTotalSec = (22 * 3600) + (30 * 60);   // 22:30:00
 
-<script>
-function openBugModal() {
-    document.getElementById('bugModal').classList.remove('hidden');
-}
+        istClock.innerText = `Current IST: ${istTime.toLocaleTimeString()}`;
 
-function closeBugModal() {
-    document.getElementById('bugModal').classList.add('hidden');
-}
+        if (currentTotalSec >= startTotalSec && currentTotalSec <= endTotalSec) {
+            // OPEN STATE
+            notifyBox.classList.add('hidden');
+            countdownDiv.classList.add('hidden');
+            statusMsg.innerHTML = "✨ We are LIVE! The kitchen is hot! 🔥";
+            statusMsg.className = "text-green-500 text-sm font-black uppercase tracking-widest";
+            orderBtn.classList.add('bg-indigo-600', 'text-white', 'hover:scale-105');
+            orderBtn.classList.remove('bg-gray-200', 'text-gray-400', 'opacity-50');
+            orderBtn.disabled = false;
+            orderBtn.onclick = () => window.location.href = "https://clean-scripts.github.io/Easygo-Items/";
+        } else {
+            // CLOSED STATE
+            notifyBox.classList.remove('hidden');
+            orderBtn.disabled = true;
+            orderBtn.classList.remove('bg-indigo-600', 'text-white', 'hover:scale-105');
+            orderBtn.classList.add('bg-gray-200', 'text-gray-400', 'opacity-50');
 
-function getTechnicalSpecs() {
-    return {
-        browser: navigator.userAgent.split(') ')[1] || navigator.userAgent,
-        os: navigator.platform,
-        screen: `${window.screen.width}x${window.screen.height}`,
-        language: navigator.language,
-        time: new Date().toLocaleString(),
-        url: window.location.href,
-        cores: navigator.hardwareConcurrency || 'Unknown',
-        memory: navigator.deviceMemory ? `${navigator.deviceMemory}GB` : 'Unknown'
-    };
-}
+            let secondsLeft = (currentTotalSec < startTotalSec) ? (startTotalSec - currentTotalSec) : ((86400 - currentTotalSec) + startTotalSec);
+            const h = Math.floor(secondsLeft / 3600);
+            const m = Math.floor((secondsLeft % 3600) / 60);
+            const s = secondsLeft % 60;
 
-function submitBugReport() {
-    const desc = document.getElementById('bug_desc').value;
-    if (!desc) {
-        alert("Please tell us What Happened!");
-        return;
+            countdownDiv.classList.remove('hidden');
+            countdownDiv.innerText = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+            statusMsg.innerHTML = (h === 0 && m < 30) ? "🤤 Almost there! Prepping fresh batches... ♨️" : "😴 We are resting. Opening in... ⏳";
+            statusMsg.className = (h === 0 && m < 30) ? "text-orange-500 text-sm font-black uppercase tracking-widest" : "text-red-500 text-sm font-black uppercase tracking-widest";
+        }
     }
 
-    const specs = getTechnicalSpecs();
-    const waNumber = "917651837322";
+    // Notification modal functions
+    function openNotifyModal() {
+        document.getElementById('notifyModal').classList.remove('hidden');
+    }
 
-    // Formatting the message for a professional developer look
-    const message = 
+    function closeNotifyModal() {
+        document.getElementById('notifyModal').classList.add('hidden');
+    }
+
+    // WhatsApp notification function - FIXED
+    function sendWhatsAppNotification() {
+        const name = document.getElementById('leadName').value.trim();
+        const phone = document.getElementById('leadPhone').value.trim();
+        
+        if (!name || !phone) {
+            alert("Please fill both name and phone number!");
+            return;
+        }
+        
+        // Clean phone number (remove spaces, dashes, etc)
+        const cleanPhone = phone.replace(/\D/g, '');
+        
+        // WhatsApp message with better formatting
+        const message = `*🥟 EASY GO - CRAVING ALERT! 🥟*%0A%0A*Hello from ${name}!*%0A%0AI'm eagerly waiting for your delicious momos to be available!%0A%0A*📍 My Details:*%0A• *Name:* ${name}%0A• *Phone:* ${phone}%0A• *Time:* ${new Date().toLocaleTimeString('en-IN', {timeZone: 'Asia/Kolkata'})} IST%0A%0A*🍽️ I'm ready to order as soon as you're open!*%0A*🚀 Please notify me when the kitchen is LIVE!*%0A%0A_This message was sent via Easy Go Notify System_`;
+        
+        // Easy Go WhatsApp number
+        const whatsappNumber = "917651837322";
+        
+        // Create WhatsApp URL
+        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
+        
+        // Close modal first
+        closeNotifyModal();
+        
+        // Open WhatsApp in new tab
+        window.open(whatsappUrl, '_blank');
+        
+        // Show confirmation
+        setTimeout(() => {
+            alert(`Thanks ${name}! We've received your notification request. We'll contact you on WhatsApp when we're open! 🥟`);
+        }, 500);
+    }
+
+    // Bug report functions
+    function openBugModal() {
+        document.getElementById('bugModal').classList.remove('hidden');
+    }
+
+    function closeBugModal() {
+        document.getElementById('bugModal').classList.add('hidden');
+    }
+
+    function getTechnicalSpecs() {
+        return {
+            browser: navigator.userAgent.split(') ')[1] || navigator.userAgent,
+            os: navigator.platform,
+            screen: `${window.screen.width}x${window.screen.height}`,
+            language: navigator.language,
+            time: new Date().toLocaleString(),
+            url: window.location.href,
+            cores: navigator.hardwareConcurrency || 'Unknown',
+            memory: navigator.deviceMemory ? `${navigator.deviceMemory}GB` : 'Unknown'
+        };
+    }
+
+    function submitBugReport() {
+        const desc = document.getElementById('bug_desc').value;
+        if (!desc) {
+            alert("Please tell us What Happened!");
+            return;
+        }
+
+        const specs = getTechnicalSpecs();
+        const waNumber = "917651837322";
+
+        // Formatting the message for a professional developer look
+        const message = 
 `*🛑 BUG REPORT @EASYGO*%0A
 ---------------------------%0A
 *Issue:* ${desc}%0A
@@ -422,14 +484,17 @@ function submitBugReport() {
 ---------------------------%0A
 _Sent from Easy Go Auto-Diagnostics_`;
 
-    // 1. Alert User
-    alert("Technical Log Generated! Hit 'Send' on WhatsApp to finish the Report. 🛠️");
+        // 1. Alert User
+        alert("Technical Log Generated! Hit 'Send' on WhatsApp to finish the Report. 🛠️");
 
-    // 2. Open WhatsApp with pre-filled technical data
-    const waUrl = `https://wa.me/${waNumber}?text=${message}`;
-    window.location.href = waUrl;
-}
-</script>
-            
+        // 2. Open WhatsApp with pre-filled technical data
+        const waUrl = `https://wa.me/${waNumber}?text=${message}`;
+        window.open(waUrl, '_blank');
+    }
+
+    // Initialize
+    setInterval(updateOrderingSystem, 1000);
+    updateOrderingSystem();
+    </script>
 </body>
 </html>
