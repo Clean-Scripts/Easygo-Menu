@@ -337,13 +337,54 @@
         </div>
     </div>
 
-    <!-- Firebase Database -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
-    <script src="https://raw.githubusercontent.com/Clean-Scripts/Easygo-Menu/main/firebase-config.js"></script>
-    <script src="https://raw.githubusercontent.com/Clean-Scripts/Easygo-Menu/main/easygo-db.js"></script>
+    <!-- Firebase Configuration - Using v8 for compatibility -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
     <script>
+    // Firebase Configuration
+    const firebaseConfig = {
+        // Replace with your actual Firebase config
+        apiKey: "AIzaSyA2xQx9D7dNlLfIvR2MYtxcG_YTIGdSQqI",
+        authDomain: "easygo-sales.firebaseapp.com",
+        databaseURL: "https://easygo-sales-default-rtdb.firebaseio.com",
+        projectId: "easygo-sales",
+        storageBucket: "easygo-sales.appspot.com",
+        messagingSenderId: "817708705026",
+        appId: "1:817708705026:web:14bb952506eaef8e0ec1e5",
+        measurementId: "G-7PC3YY3FK0"
+    };
+
+    // Initialize Firebase
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
+    
+    // Initialize database
+    const easygoDB = firebase.database();
+    
+    // Make it globally available
+    window.easygoDB = easygoDB;
+
+    // Firebase helper functions
+    function logEvent(eventType, data) {
+        try {
+            const timestamp = new Date().toISOString();
+            const eventRef = easygoDB.ref('analytics/' + eventType);
+            
+            eventRef.push({
+                ...data,
+                timestamp: timestamp,
+                userAgent: navigator.userAgent,
+                url: window.location.href
+            });
+            
+            console.log(`Event logged: ${eventType}`, data);
+        } catch (error) {
+            console.error('Failed to log event:', error);
+        }
+    }
+
     // Time-based ordering system
     function updateOrderingSystem() {
         const orderBtn = document.getElementById('placeOrderBtn');
@@ -372,7 +413,7 @@
             orderBtn.disabled = false;
             orderBtn.onclick = () => {
                 // Log menu click to Firebase
-                easygoDB.logEvent('menuClick', {
+                logEvent('menuClick', {
                     action: 'place_order_click',
                     time: istTime.toLocaleTimeString()
                 });
@@ -432,7 +473,7 @@
         closeNotifyModal();
         
         // Save notification to Firebase
-        easygoDB.logEvent('notifyRequest', {
+        logEvent('notifyRequest', {
             name: name,
             phone: phone,
             timestamp: new Date().toISOString()
@@ -497,7 +538,7 @@
 _Sent from Easy Go Auto-Diagnostics_`;
 
         // Save bug report to Firebase
-        easygoDB.logEvent('bugReport', {
+        logEvent('bugReport', {
             description: desc,
             specs: specs,
             timestamp: new Date().toISOString()
@@ -517,7 +558,7 @@ _Sent from Easy Go Auto-Diagnostics_`;
 
     // Log page view to Firebase
     window.addEventListener('DOMContentLoaded', () => {
-        easygoDB.logEvent('pageView', {
+        logEvent('pageView', {
             page: 'menu',
             timestamp: new Date().toISOString()
         });
