@@ -76,7 +76,61 @@
     <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <!-- Firebase SDK - Add this FIRST in <head> -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
+<!-- Firebase Configuration - Add this AFTER Firebase SDK -->
+    <script>
+    // ==================== FIREBASE CONFIGURATION ====================
+    const firebaseConfig = {
+        apiKey: "AIzaSyCU_wJYBTwEwMZQ-iTYOjUZuEHEphA0DXc",
+        authDomain: "easygo-10f4b.firebaseapp.com",
+        databaseURL: "https://easygo-10f4b-default-rtdb.asia-southeast1.firebasedatabase.app/",
+        projectId: "easygo-10f4b",
+        storageBucket: "easygo-10f4b.firebasestorage.app",
+        messagingSenderId: "197660067542",
+        appId: "1:197660067542:web:6c616efb479b122f1f6b77"
+    };
     
+    // Global Firebase variables
+    let database;
+    let isFirebaseConnected = false;
+    
+    // Initialize Firebase
+    function initializeFirebase() {
+        try {
+            const app = firebase.initializeApp(firebaseConfig);
+            database = firebase.database();
+            
+            // Monitor connection status
+            database.ref(".info/connected").on("value", function(snap) {
+                isFirebaseConnected = snap.val() === true;
+                console.log("Firebase connected:", isFirebaseConnected);
+                
+                // Update UI if status element exists
+                const statusElement = document.getElementById('firebaseStatus');
+                if (statusElement) {
+                    if (isFirebaseConnected) {
+                        statusElement.textContent = "✅ Connected";
+                        statusElement.className = "bg-green-500 text-white";
+                    } else {
+                        statusElement.textContent = "❌ Disconnected";
+                        statusElement.className = "bg-red-500 text-white";
+                    }
+                }
+            });
+            
+            return true;
+        } catch (error) {
+            console.error("Firebase initialization error:", error);
+            return false;
+        }
+    }
+    
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', initializeFirebase);
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
     <title>Easy Go | Menu</title>
 </head>
