@@ -337,9 +337,13 @@
         </div>
     </div>
 
-                
+    <!-- Firebase Database -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+    <script src="https://raw.githubusercontent.com/Clean-Scripts/Easygo-Menu/main/firebase-config.js"></script>
+    <script src="https://raw.githubusercontent.com/Clean-Scripts/Easygo-Menu/main/easygo-db.js"></script>
 
-    <script>        
+    <script>
     // Time-based ordering system
     function updateOrderingSystem() {
         const orderBtn = document.getElementById('placeOrderBtn');
@@ -366,7 +370,14 @@
             orderBtn.classList.add('bg-indigo-600', 'text-white', 'hover:scale-105');
             orderBtn.classList.remove('bg-gray-200', 'text-gray-400', 'opacity-50');
             orderBtn.disabled = false;
-            orderBtn.onclick = () => window.location.href = "https://clean-scripts.github.io/Easygo-Items/";
+            orderBtn.onclick = () => {
+                // Log menu click to Firebase
+                easygoDB.logEvent('menuClick', {
+                    action: 'place_order_click',
+                    time: istTime.toLocaleTimeString()
+                });
+                window.location.href = "https://clean-scripts.github.io/Easygo-Items/";
+            };
         } else {
             // CLOSED STATE
             notifyBox.classList.remove('hidden');
@@ -419,6 +430,13 @@
         
         // Close modal first
         closeNotifyModal();
+        
+        // Save notification to Firebase
+        easygoDB.logEvent('notifyRequest', {
+            name: name,
+            phone: phone,
+            timestamp: new Date().toISOString()
+        });
         
         // Open WhatsApp in new tab
         window.open(whatsappUrl, '_blank');
@@ -478,6 +496,13 @@
 ---------------------------%0A
 _Sent from Easy Go Auto-Diagnostics_`;
 
+        // Save bug report to Firebase
+        easygoDB.logEvent('bugReport', {
+            description: desc,
+            specs: specs,
+            timestamp: new Date().toISOString()
+        });
+
         // 1. Alert User
         alert("Technical Log Generated! Hit 'Send' on WhatsApp to finish the Report. 🛠️");
 
@@ -489,25 +514,14 @@ _Sent from Easy Go Auto-Diagnostics_`;
     // Initialize
     setInterval(updateOrderingSystem, 1000);
     updateOrderingSystem();
+
+    // Log page view to Firebase
+    window.addEventListener('DOMContentLoaded', () => {
+        easygoDB.logEvent('pageView', {
+            page: 'menu',
+            timestamp: new Date().toISOString()
+        });
+    });
     </script>
-    <!-- Firebase & Database -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
-    <script src="https://raw.githubusercontent.com/Clean-Scripts/Easygo-Menu/main/firebase-config.js"></script>
-    <script src="https://raw.githubusercontent.com/Clean-Scripts/Easygo-Menu/main/easygo-db.js"></script>
-    
-        <script>
-        // Update the placeOrderBtn click to save session
-        document.getElementById('placeOrderBtn').onclick = function() {
-            // Save opening time for analytics
-            easygoDB.db.ref('analytics/openTimes').push({
-                timestamp: firebase.database.ServerValue.TIMESTAMP,
-                source: 'menu_page'
-            });
-            
-            // Redirect to items page
-            window.location.href = "https://clean-scripts.github.io/Easygo-Items/";
-        };
-        </script>
 </body>
 </html>
