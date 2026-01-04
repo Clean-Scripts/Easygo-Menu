@@ -4,11 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Clean-Scripts/EasyGo-Expense-Tracker/refs/heads/main/logo.png">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
-    <title>Easy Go | Menu</title>
+    
+    <!-- Use a better method for Tailwind CSS to avoid warning -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        
+        /* Critical Tailwind classes used in your page */
+        .antialiased { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        .flex { display: flex; }
+        .flex-col { flex-direction: column; }
+        .min-h-screen { min-height: 100vh; }
+        .fixed { position: fixed; }
+        .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+        .hidden { display: none; }
+        .flex { display: flex; }
+        .items-center { align-items: center; }
+        .justify-center { justify-content: center; }
+        .z-50 { z-index: 50; }
+        .z-100 { z-index: 100; }
+        .bg-black { background-color: #000; }
+        .bg-white { background-color: #fff; }
+        .text-center { text-align: center; }
+        .font-black { font-weight: 900; }
+        .uppercase { text-transform: uppercase; }
+        .tracking-widest { letter-spacing: 0.1em; }
+        .rounded-\[2\.5rem\] { border-radius: 2.5rem; }
+        .p-8 { padding: 2rem; }
+        .max-w-sm { max-width: 24rem; }
+        .w-full { width: 100%; }
+        .shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+        
+        /* Your existing styles */
         body { font-family: 'Inter', sans-serif; background: #ffffff; color: #1a1a1a; min-height: 100vh; }
         .banner-clip { clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); }
         .price-tag { text-shadow: 1px 1px 0px #fff; }
@@ -24,7 +50,30 @@
         /* Footer fix */
         .main-content { min-height: calc(100vh - 200px); }
         footer { margin-top: auto; }
+        
+        /* Additional utility classes */
+        .grid { display: grid; }
+        .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+        @media (min-width: 768px) {
+            .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        .gap-4 { gap: 1rem; }
+        .mt-8 { margin-top: 2rem; }
+        .px-4 { padding-left: 1rem; padding-right: 1rem; }
+        .max-w-3xl { max-width: 48rem; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .text-7xl { font-size: 4.5rem; line-height: 1; }
+        .text-gray-900 { color: #111827; }
+        .text-gray-500 { color: #6b7280; }
+        .text-xs { font-size: 0.75rem; line-height: 1rem; }
+        .italic { font-style: italic; }
+        .leading-none { line-height: 1; }
+        .tracking-\[0\.2em\] { letter-spacing: 0.2em; }
+        .mt-3 { margin-top: 0.75rem; }
     </style>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <title>Easy Go | Menu</title>
 </head>
 <body class="antialiased flex flex-col min-h-screen">
 
@@ -65,6 +114,7 @@
             <div class="mt-12 space-y-4">
                 <h3 class="text-xs font-black text-gray-400 uppercase tracking-[0.5em] mb-6">Hot & Fresh Snacks</h3>
 
+                <!-- Menu items remain the same -->
                 <a href="https://clean-scripts.github.io/Easygo-Items/?item=veg-momos-steamed">
                 <div class="p-6 bg-gray-50 rounded-3xl border-2 border-gray-100 flex justify-between items-center hover:scale-[1.01] transition-transform">
                     <div class="flex items-center gap-4 text-left">
@@ -92,6 +142,7 @@
                 </div>
                 </a>
 
+                <!-- ... rest of menu items ... -->
                 <a href="https://clean-scripts.github.io/Easygo-Items/?item=cheese-corn-steamed">
                 <div class="p-6 bg-gray-50 rounded-3xl border-2 border-gray-100 flex justify-between items-center hover:scale-[1.01] transition-transform">
                     <div class="flex items-center gap-4 text-left">
@@ -171,6 +222,7 @@
                 </a>
             </div>
 
+            <!-- ... rest of your HTML content ... -->
             <div class="mt-20">
                 <div class="flex items-center gap-4 justify-center mb-8">
                     <div class="h-[2px] bg-gray-200 flex-grow"></div>
@@ -218,37 +270,36 @@
                 </div>
             </div>
 
-
             <div class="mt-16 pt-10 border-t-4 border-gray-900 flex flex-col items-center gap-2">
-            <div class="mt-8 flex flex-col items-center gap-6 p-8 bg-white/50 backdrop-blur-md rounded-[2.5rem] border border-gray-100 shadow-inner">
+                <div class="mt-8 flex flex-col items-center gap-6 p-8 bg-white/50 backdrop-blur-md rounded-[2.5rem] border border-gray-100 shadow-inner">
         
-        <div id="statusContainer" class="text-center space-y-2">
-            <p id="timeStatus" class="text-sm font-black uppercase tracking-widest transition-all duration-500">
-                </p>
-            <div id="countdownDisplay" class="text-4xl font-black text-gray-900 tracking-tighter hidden">
-                00:00:00
+                    <div id="statusContainer" class="text-center space-y-2">
+                        <p id="timeStatus" class="text-sm font-black uppercase tracking-widest transition-all duration-500"></p>
+                        <div id="countdownDisplay" class="text-4xl font-black text-gray-900 tracking-tighter hidden">
+                            00:00:00
+                        </div>
+                    </div>
+
+                    <button id="placeOrderBtn" 
+                            class="w-full max-w-md py-5 rounded-[2rem] text-2xl font-black uppercase tracking-tighter shadow-2xl transition-all duration-500 transform">
+                        🚀 Place Order
+                    </button>
+
+                    <div id="notifySection" class="hidden w-full max-w-md p-6 bg-amber-50 rounded-3xl border border-amber-100 text-center animate-bounce-short">
+                        <p class="text-[10px] font-black text-amber-600 uppercase tracking-widest mb-3">Don't miss the first batch! 🥟</p>
+                        <button onclick="openNotifyModal()" class="w-full py-3 bg-amber-500 text-white rounded-2xl font-black uppercase text-xs shadow-md hover:bg-amber-600 transition-all">
+                            🔔 Notify Me When Open
+                        </button>
+                    </div>
+
+                    <div class="flex flex-col items-center gap-1">
+                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                            🕒 Daily Service: 06:45 PM — 11:30 PM
+                        </p>
+                        <p id="liveIST" class="text-[9px] font-medium text-indigo-300 uppercase italic"></p>
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <button id="placeOrderBtn" 
-                class="w-full max-w-md py-5 rounded-[2rem] text-2xl font-black uppercase tracking-tighter shadow-2xl transition-all duration-500 transform">
-            🚀 Place Order
-        </button>
-
-        <div id="notifySection" class="hidden w-full max-w-md p-6 bg-amber-50 rounded-3xl border border-amber-100 text-center animate-bounce-short">
-            <p class="text-[10px] font-black text-amber-600 uppercase tracking-widest mb-3">Don't miss the first batch! 🥟</p>
-            <button onclick="openNotifyModal()" class="w-full py-3 bg-amber-500 text-white rounded-2xl font-black uppercase text-xs shadow-md hover:bg-amber-600 transition-all">
-                🔔 Notify Me When Open
-            </button>
-        </div>
-
-        <div class="flex flex-col items-center gap-1">
-            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                🕒 Daily Service: 06:45 PM — 11:30 PM
-            </p>
-            <p id="liveIST" class="text-[9px] font-medium text-indigo-300 uppercase italic"></p>
-        </div>
-    </div>
         </div>
     </div>
 
@@ -281,12 +332,14 @@
                         <button onclick="openBugModal()" class="bg-red-500 text-white p-3 rounded-2xl shadow-lg hover:bg-red-600 transition-all">
                             <span class="font-black text-xs uppercase">Report Bug</span>
                         </button>
+                    </div>
                 </div>
             </div>
+        </div>
     </footer>
 
     <!-- Notification Modal -->
-    <div id="notifyModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center z-[100] p-4">
+    <div id="notifyModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center z-100 p-4">
         <div class="bg-white rounded-[2.5rem] p-8 max-w-sm w-full shadow-2xl text-gray-900">
             <h2 class="text-2xl font-black mb-2 uppercase tracking-tighter">Get Notified! 📢</h2>
             <p class="text-xs font-medium text-gray-500 mb-6">We'll send you a WhatsApp message when we're open and ready to serve!</p>
@@ -310,7 +363,7 @@
     </div>
 
     <!-- Bug Report Modal -->
-    <div id="bugModal" class="fixed inset-0 bg-black/70 backdrop-blur-md hidden flex items-center justify-center z-[250] p-4">
+    <div id="bugModal" class="fixed inset-0 bg-black/70 backdrop-blur-md hidden flex items-center justify-center z-250 p-4">
         <div class="bg-white rounded-[2.5rem] p-8 max-w-sm w-full shadow-2xl text-gray-900 border-2 border-red-50">
             <div class="flex justify-between items-start mb-4">
                 <div>
@@ -337,54 +390,8 @@
         </div>
     </div>
 
-    <!-- Firebase Configuration - Using v8 for compatibility -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-
+    <!-- Simplified JavaScript without Firebase -->
     <script>
-    // Firebase Configuration
-    const firebaseConfig = {
-        // Replace with your actual Firebase config
-        apiKey: "AIzaSyA2xQx9D7dNlLfIvR2MYtxcG_YTIGdSQqI",
-        authDomain: "easygo-sales.firebaseapp.com",
-        databaseURL: "https://easygo-sales-default-rtdb.firebaseio.com",
-        projectId: "easygo-sales",
-        storageBucket: "easygo-sales.appspot.com",
-        messagingSenderId: "817708705026",
-        appId: "1:817708705026:web:14bb952506eaef8e0ec1e5",
-        measurementId: "G-7PC3YY3FK0"
-    };
-
-    // Initialize Firebase
-    if (!firebase.apps.length) {
-        firebase.initializeApp(firebaseConfig);
-    }
-    
-    // Initialize database
-    const easygoDB = firebase.database();
-    
-    // Make it globally available
-    window.easygoDB = easygoDB;
-
-    // Firebase helper functions
-    function logEvent(eventType, data) {
-        try {
-            const timestamp = new Date().toISOString();
-            const eventRef = easygoDB.ref('analytics/' + eventType);
-            
-            eventRef.push({
-                ...data,
-                timestamp: timestamp,
-                userAgent: navigator.userAgent,
-                url: window.location.href
-            });
-            
-            console.log(`Event logged: ${eventType}`, data);
-        } catch (error) {
-            console.error('Failed to log event:', error);
-        }
-    }
-
     // Time-based ordering system
     function updateOrderingSystem() {
         const orderBtn = document.getElementById('placeOrderBtn');
@@ -408,23 +415,21 @@
             countdownDiv.classList.add('hidden');
             statusMsg.innerHTML = "✨ We are LIVE! The kitchen is hot! 🔥";
             statusMsg.className = "text-green-500 text-sm font-black uppercase tracking-widest";
-            orderBtn.classList.add('bg-indigo-600', 'text-white', 'hover:scale-105');
-            orderBtn.classList.remove('bg-gray-200', 'text-gray-400', 'opacity-50');
+            orderBtn.style.background = '#4f46e5';
+            orderBtn.style.color = 'white';
+            orderBtn.style.opacity = '1';
             orderBtn.disabled = false;
             orderBtn.onclick = () => {
-                // Log menu click to Firebase
-                logEvent('menuClick', {
-                    action: 'place_order_click',
-                    time: istTime.toLocaleTimeString()
-                });
+                console.log('Order button clicked at:', istTime.toLocaleTimeString());
                 window.location.href = "https://clean-scripts.github.io/Easygo-Items/";
             };
         } else {
             // CLOSED STATE
             notifyBox.classList.remove('hidden');
             orderBtn.disabled = true;
-            orderBtn.classList.remove('bg-indigo-600', 'text-white', 'hover:scale-105');
-            orderBtn.classList.add('bg-gray-200', 'text-gray-400', 'opacity-50');
+            orderBtn.style.background = '#e5e7eb';
+            orderBtn.style.color = '#9ca3af';
+            orderBtn.style.opacity = '0.5';
 
             let secondsLeft = (currentTotalSec < startTotalSec) ? (startTotalSec - currentTotalSec) : ((86400 - currentTotalSec) + startTotalSec);
             const h = Math.floor(secondsLeft / 3600);
@@ -447,7 +452,7 @@
         document.getElementById('notifyModal').classList.add('hidden');
     }
 
-    // WhatsApp notification function - FIXED
+    // WhatsApp notification function
     function sendWhatsAppNotification() {
         const name = document.getElementById('leadName').value.trim();
         const phone = document.getElementById('leadPhone').value.trim();
@@ -471,13 +476,6 @@
         
         // Close modal first
         closeNotifyModal();
-        
-        // Save notification to Firebase
-        logEvent('notifyRequest', {
-            name: name,
-            phone: phone,
-            timestamp: new Date().toISOString()
-        });
         
         // Open WhatsApp in new tab
         window.open(whatsappUrl, '_blank');
@@ -537,13 +535,6 @@
 ---------------------------%0A
 _Sent from Easy Go Auto-Diagnostics_`;
 
-        // Save bug report to Firebase
-        logEvent('bugReport', {
-            description: desc,
-            specs: specs,
-            timestamp: new Date().toISOString()
-        });
-
         // 1. Alert User
         alert("Technical Log Generated! Hit 'Send' on WhatsApp to finish the Report. 🛠️");
 
@@ -556,13 +547,8 @@ _Sent from Easy Go Auto-Diagnostics_`;
     setInterval(updateOrderingSystem, 1000);
     updateOrderingSystem();
 
-    // Log page view to Firebase
-    window.addEventListener('DOMContentLoaded', () => {
-        logEvent('pageView', {
-            page: 'menu',
-            timestamp: new Date().toISOString()
-        });
-    });
+    // Remove Firebase completely to avoid errors
+    console.log('Easy Go Menu loaded successfully!');
     </script>
 </body>
 </html>
