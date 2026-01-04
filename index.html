@@ -6,28 +6,6 @@
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Clean-Scripts/EasyGo-Expense-Tracker/refs/heads/main/logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
-    <!-- Firebase Scripts -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
-    <script>
-          // PASTE YOUR FIREBASE CONFIG HERE
-          const firebaseConfig = {
-            apiKey: "AIzaSyBkBWtdxiN92TOqQni5lM_w1YQfydsKwG0",
-            authDomain: "easygoooo.firebaseapp.com",
-            databaseURL: "https://easygoooo-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "easygoooo",
-            storageBucket: "easygoooo.firebasestorage.app",
-            messagingSenderId: "895871235594",
-            appId: "1:895871235594:web:e918f85a8c4da2ecd391f3",
-            measurementId: "G-VPBJ2QKN1T"
-          };
-        
-          // Initialize Firebase
-          const app = firebase.initializeApp(firebaseConfig);
-          const database = firebase.database();
-          
-          console.log("Firebase connected!");
-    </script>
     <title>Easy Go | Menu</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
@@ -512,5 +490,24 @@ _Sent from Easy Go Auto-Diagnostics_`;
     setInterval(updateOrderingSystem, 1000);
     updateOrderingSystem();
     </script>
+    <!-- Firebase & Database -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+    <script src="https://raw.githubusercontent.com/Clean-Scripts/Easygo-Menu/main/firebase-config.js"></script>
+    <script src="https://raw.githubusercontent.com/Clean-Scripts/Easygo-Menu/main/easygo-db.js"></script>
+    
+        <script>
+        // Update the placeOrderBtn click to save session
+        document.getElementById('placeOrderBtn').onclick = function() {
+            // Save opening time for analytics
+            easygoDB.db.ref('analytics/openTimes').push({
+                timestamp: firebase.database.ServerValue.TIMESTAMP,
+                source: 'menu_page'
+            });
+            
+            // Redirect to items page
+            window.location.href = "https://clean-scripts.github.io/Easygo-Items/";
+        };
+        </script>
 </body>
 </html>
