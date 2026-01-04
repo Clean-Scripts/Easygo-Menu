@@ -6,6 +6,28 @@
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Clean-Scripts/EasyGo-Expense-Tracker/refs/heads/main/logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+    <script>
+          // PASTE YOUR FIREBASE CONFIG HERE
+          const firebaseConfig = {
+            apiKey: "AIzaSyBkBWtdxiN92TOqQni5lM_w1YQfydsKwG0",
+            authDomain: "easygoooo.firebaseapp.com",
+            databaseURL: "https://easygoooo-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "easygoooo",
+            storageBucket: "easygoooo.firebasestorage.app",
+            messagingSenderId: "895871235594",
+            appId: "1:895871235594:web:e918f85a8c4da2ecd391f3",
+            measurementId: "G-VPBJ2QKN1T"
+          };
+        
+          // Initialize Firebase
+          const app = firebase.initializeApp(firebaseConfig);
+          const database = firebase.database();
+          
+          console.log("Firebase connected!");
+    </script>
     <title>Easy Go | Menu</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
@@ -337,7 +359,9 @@
         </div>
     </div>
 
-    <script>
+                
+
+    <script>        
     // Time-based ordering system
     function updateOrderingSystem() {
         const orderBtn = document.getElementById('placeOrderBtn');
