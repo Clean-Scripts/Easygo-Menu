@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Clean-Scripts/EasyGo-Expense-Tracker/refs/heads/main/logo.png">
     
-    <!-- Use a better method for Tailwind CSS to avoid warning -->
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
         
@@ -70,12 +73,33 @@
         .leading-none { line-height: 1; }
         .tracking-\[0\.2em\] { letter-spacing: 0.2em; }
         .mt-3 { margin-top: 0.75rem; }
+        
+        /* Firebase connection status */
+        .connection-status {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        .connection-connected { background-color: #10b981; color: white; }
+        .connection-disconnected { background-color: #ef4444; color: white; }
+        .connection-connecting { background-color: #f59e0b; color: white; }
     </style>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
     <title>Easy Go | Menu</title>
 </head>
 <body class="antialiased flex flex-col min-h-screen">
+
+    <!-- Firebase Connection Status Indicator -->
+    <div id="firebaseStatus" class="connection-status hidden">
+        🔄 Connecting...
+    </div>
 
     <div class="main-content">
         <header class="relative mb-8">
@@ -390,8 +414,155 @@
         </div>
     </div>
 
-    <!-- Simplified JavaScript without Firebase -->
+    <!-- JavaScript with Firebase Integration -->
     <script>
+    // Firebase Configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyCU_wJYBTwEwMZQ-iTYOjUZuEHEphA0DXc",
+        authDomain: "easygo-10f4b.firebaseapp.com",
+        projectId: "easygo-10f4b",
+        storageBucket: "easygo-10f4b.firebasestorage.app",
+        messagingSenderId: "197660067542",
+        appId: "1:197660067542:web:6c616efb479b122f1f6b77",
+        databaseURL: "https://easygo-10f4b-default-rtdb.firebaseio.com/" // Added database URL
+    };
+
+    // Initialize Firebase
+    let database;
+    let firebaseApp;
+    let isFirebaseConnected = false;
+
+    function initializeFirebase() {
+        try {
+            firebaseApp = firebase.initializeApp(firebaseConfig);
+            database = firebase.database();
+            
+            // Set up connection state listener
+            const connectedRef = database.ref(".info/connected");
+            connectedRef.on("value", function(snap) {
+                const statusElement = document.getElementById('firebaseStatus');
+                if (snap.val() === true) {
+                    isFirebaseConnected = true;
+                    statusElement.classList.remove('hidden', 'connection-disconnected', 'connection-connecting');
+                    statusElement.classList.add('connection-connected');
+                    statusElement.textContent = "✅ Connected to Database";
+                    console.log("Firebase Realtime Database connected");
+                    
+                    // Hide after 3 seconds
+                    setTimeout(() => {
+                        statusElement.classList.add('hidden');
+                    }, 3000);
+                } else {
+                    isFirebaseConnected = false;
+                    statusElement.classList.remove('hidden', 'connection-connected');
+                    statusElement.classList.add('connection-disconnected');
+                    statusElement.textContent = "❌ Database Disconnected";
+                }
+            });
+            
+            // Show connecting status
+            const statusElement = document.getElementById('firebaseStatus');
+            statusElement.classList.remove('hidden');
+            statusElement.classList.add('connection-connecting');
+            statusElement.textContent = "🔄 Connecting to Database...";
+            
+        } catch (error) {
+            console.error("Firebase initialization error:", error);
+            document.getElementById('firebaseStatus').classList.add('hidden');
+        }
+    }
+
+    // Store notification in Firebase
+    async function storeNotification(name, phone) {
+        if (!isFirebaseConnected) {
+            console.warn("Firebase not connected, notification not stored");
+            return false;
+        }
+
+        try {
+            const notificationData = {
+                name: name,
+                phone: phone,
+                timestamp: Date.now(),
+                date: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+                status: 'pending',
+                type: 'notification_request'
+            };
+
+            const newNotificationRef = database.ref('notifications').push();
+            await newNotificationRef.set(notificationData);
+            
+            console.log("Notification stored in Firebase:", notificationData);
+            return true;
+        } catch (error) {
+            console.error("Error storing notification:", error);
+            return false;
+        }
+    }
+
+    // Store bug report in Firebase
+    async function storeBugReport(description, specs) {
+        if (!isFirebaseConnected) {
+            console.warn("Firebase not connected, bug report not stored");
+            return false;
+        }
+
+        try {
+            const bugReportData = {
+                description: description,
+                specs: specs,
+                timestamp: Date.now(),
+                date: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+                status: 'new',
+                type: 'bug_report'
+            };
+
+            const newBugReportRef = database.ref('bug_reports').push();
+            await newBugReportRef.set(bugReportData);
+            
+            console.log("Bug report stored in Firebase:", bugReportData);
+            return true;
+        } catch (error) {
+            console.error("Error storing bug report:", error);
+            return false;
+        }
+    }
+
+    // Store click analytics
+    async function trackClick(itemName) {
+        if (!isFirebaseConnected) return;
+
+        try {
+            const clickData = {
+                item: itemName,
+                timestamp: Date.now(),
+                date: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+                userAgent: navigator.userAgent,
+                screenSize: `${window.screen.width}x${window.screen.height}`
+            };
+
+            await database.ref('clicks').push(clickData);
+        } catch (error) {
+            console.error("Error tracking click:", error);
+        }
+    }
+
+    // Get technical specs
+    function getTechnicalSpecs() {
+        return {
+            browser: navigator.userAgent,
+            os: navigator.platform,
+            screen: `${window.screen.width}x${window.screen.height}`,
+            language: navigator.language,
+            time: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+            url: window.location.href,
+            cores: navigator.hardwareConcurrency || 'Unknown',
+            memory: navigator.deviceMemory ? `${navigator.deviceMemory}GB` : 'Unknown',
+            connection: navigator.connection ? navigator.connection.effectiveType : 'Unknown',
+            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+        };
+    }
+
     // Time-based ordering system
     function updateOrderingSystem() {
         const orderBtn = document.getElementById('placeOrderBtn');
@@ -421,6 +592,9 @@
             orderBtn.disabled = false;
             orderBtn.onclick = () => {
                 console.log('Order button clicked at:', istTime.toLocaleTimeString());
+                if (isFirebaseConnected) {
+                    trackClick('place_order_button');
+                }
                 window.location.href = "https://clean-scripts.github.io/Easygo-Items/";
             };
         } else {
@@ -446,6 +620,9 @@
     // Notification modal functions
     function openNotifyModal() {
         document.getElementById('notifyModal').classList.remove('hidden');
+        if (isFirebaseConnected) {
+            trackClick('open_notify_modal');
+        }
     }
 
     function closeNotifyModal() {
@@ -453,13 +630,21 @@
     }
 
     // WhatsApp notification function
-    function sendWhatsAppNotification() {
+    async function sendWhatsAppNotification() {
         const name = document.getElementById('leadName').value.trim();
         const phone = document.getElementById('leadPhone').value.trim();
         
         if (!name || !phone) {
             alert("Please fill both name and phone number!");
             return;
+        }
+        
+        // Store in Firebase
+        if (isFirebaseConnected) {
+            const stored = await storeNotification(name, phone);
+            if (stored) {
+                console.log("Notification stored successfully");
+            }
         }
         
         // Clean phone number (remove spaces, dashes, etc)
@@ -477,6 +662,10 @@
         // Close modal first
         closeNotifyModal();
         
+        // Clear form
+        document.getElementById('leadName').value = '';
+        document.getElementById('leadPhone').value = '';
+        
         // Open WhatsApp in new tab
         window.open(whatsappUrl, '_blank');
         
@@ -489,26 +678,16 @@
     // Bug report functions
     function openBugModal() {
         document.getElementById('bugModal').classList.remove('hidden');
+        if (isFirebaseConnected) {
+            trackClick('open_bug_modal');
+        }
     }
 
     function closeBugModal() {
         document.getElementById('bugModal').classList.add('hidden');
     }
 
-    function getTechnicalSpecs() {
-        return {
-            browser: navigator.userAgent.split(') ')[1] || navigator.userAgent,
-            os: navigator.platform,
-            screen: `${window.screen.width}x${window.screen.height}`,
-            language: navigator.language,
-            time: new Date().toLocaleString(),
-            url: window.location.href,
-            cores: navigator.hardwareConcurrency || 'Unknown',
-            memory: navigator.deviceMemory ? `${navigator.deviceMemory}GB` : 'Unknown'
-        };
-    }
-
-    function submitBugReport() {
+    async function submitBugReport() {
         const desc = document.getElementById('bug_desc').value;
         if (!desc) {
             alert("Please tell us What Happened!");
@@ -516,6 +695,15 @@
         }
 
         const specs = getTechnicalSpecs();
+        
+        // Store in Firebase
+        if (isFirebaseConnected) {
+            const stored = await storeBugReport(desc, specs);
+            if (stored) {
+                console.log("Bug report stored successfully");
+            }
+        }
+
         const waNumber = "917651837322";
 
         // Formatting the message for a professional developer look
@@ -541,14 +729,41 @@ _Sent from Easy Go Auto-Diagnostics_`;
         // 2. Open WhatsApp with pre-filled technical data
         const waUrl = `https://wa.me/${waNumber}?text=${message}`;
         window.open(waUrl, '_blank');
+        
+        // Clear form and close modal
+        document.getElementById('bug_desc').value = '';
+        closeBugModal();
     }
 
-    // Initialize
-    setInterval(updateOrderingSystem, 1000);
-    updateOrderingSystem();
+    // Initialize everything when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize Firebase
+        initializeFirebase();
+        
+        // Set up time-based ordering system
+        setInterval(updateOrderingSystem, 1000);
+        updateOrderingSystem();
+        
+        // Track menu item clicks
+        const menuLinks = document.querySelectorAll('a[href*="Easygo-Items"]');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const itemName = this.querySelector('h2')?.textContent || 'unknown_item';
+                if (isFirebaseConnected) {
+                    trackClick(itemName);
+                }
+            });
+        });
+        
+        console.log('Easy Go Menu loaded successfully with Firebase!');
+    });
 
-    // Remove Firebase completely to avoid errors
-    console.log('Easy Go Menu loaded successfully!');
+    // Track page view
+    window.addEventListener('load', function() {
+        if (isFirebaseConnected) {
+            trackClick('page_view');
+        }
+    });
     </script>
 </body>
 </html>
