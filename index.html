@@ -5,37 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Clean-Scripts/EasyGo-Expense-Tracker/refs/heads/main/logo.png">
     
-    <!-- Load Full Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    animation: {
-                        'bounce-short': 'bounce-short 3s infinite',
-                    },
-                    keyframes: {
-                        'bounce-short': {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-5px)' },
-                        }
-                    },
-                    fontFamily: {
-                        'inter': ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
-    
-    <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
-    
+    <!-- Use Tailwind CSS Play CDN (Production-ready) -->
+    <script src="https://cdn.tailwindcss.com/3.3.0"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        
+        /* Custom styles */
         body {
             font-family: 'Inter', sans-serif;
         }
@@ -76,12 +51,36 @@
         .main-content {
             min-height: calc(100vh - 200px);
         }
+        
+        /* Custom animation */
+        @keyframes bounce-short {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        .animate-bounce-short {
+            animation: bounce-short 3s infinite;
+        }
+        
+        /* Custom rounded corners */
+        .rounded-\[2\.5rem\] {
+            border-radius: 2.5rem;
+        }
+        .rounded-\[2rem\] {
+            border-radius: 2rem;
+        }
     </style>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
     <title>Easy Go | Menu</title>
 </head>
-<body class="antialiased font-inter bg-white text-gray-900 flex flex-col min-h-screen">
+<body class="antialiased bg-white text-gray-900 flex flex-col min-h-screen">
 
     <!-- Firebase Connection Status Indicator -->
     <div id="firebaseStatus" class="connection-status hidden">
@@ -289,11 +288,6 @@
                         </div>
                     </div>
 
-                    <button id="placeOrderBtn" 
-                            class="w-full max-w-md py-5 rounded-[2rem] text-xl md:text-2xl font-black uppercase tracking-tighter shadow-2xl transition-all duration-500 transform">
-                        🚀 Place Order
-                    </button>
-
                     <div id="notifySection" class="hidden w-full max-w-md p-6 bg-amber-50 rounded-3xl border border-amber-100 text-center animate-bounce-short">
                         <p class="text-[10px] font-black text-amber-600 uppercase tracking-widest mb-3">Don't miss the first batch! 🥟</p>
                         <button onclick="openNotifyModal()" class="w-full py-3 bg-amber-500 text-white rounded-2xl font-black uppercase text-xs shadow-md hover:bg-amber-600 transition-all">
@@ -330,9 +324,6 @@
                 <div class="text-center md:text-right">
                     <p class="text-gray-400 text-sm mb-2">
                         © 2024 Easy Go | All Rights Reserved
-                    </p>
-                    <p class="text-gray-500 text-xs">
-                        Serving daily from 5:00 PM to 10:00 PM
                     </p>
                     <div class="mt-4 flex flex-wrap justify-center md:justify-end gap-2">
                         <a href="#" class="text-gray-400 hover:text-white text-sm mr-4">View Menu</a>
@@ -520,7 +511,7 @@
                 item: itemName,
                 timestamp: Date.now(),
                 date: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
-                userAgent: navigator.userAgent.substring(0, 100), // Limit length
+                userAgent: navigator.userAgent.substring(0, 100),
                 screenSize: `${window.screen.width}x${window.screen.height}`
             };
 
@@ -533,12 +524,12 @@
     // Get technical specs
     function getTechnicalSpecs() {
         return {
-            browser: navigator.userAgent.substring(0, 150), // Limit length
+            browser: navigator.userAgent.substring(0, 150),
             os: navigator.platform,
             screen: `${window.screen.width}x${window.screen.height}`,
             language: navigator.language,
             time: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
-            url: window.location.href.substring(0, 100), // Limit length
+            url: window.location.href.substring(0, 100),
             cores: navigator.hardwareConcurrency || 'Unknown',
             memory: navigator.deviceMemory ? `${navigator.deviceMemory}GB` : 'Unknown',
             connection: navigator.connection ? navigator.connection.effectiveType : 'Unknown',
@@ -546,9 +537,8 @@
         };
     }
 
-    // Time-based ordering system
+    // Time-based ordering system (Removed place order button functionality)
     function updateOrderingSystem() {
-        const orderBtn = document.getElementById('placeOrderBtn');
         const statusMsg = document.getElementById('timeStatus');
         const countdownDiv = document.getElementById('countdownDisplay');
         const notifyBox = document.getElementById('notifySection');
@@ -569,26 +559,10 @@
             countdownDiv.classList.add('hidden');
             statusMsg.innerHTML = "✨ We are LIVE! The kitchen is hot! 🔥";
             statusMsg.className = "text-green-500 text-sm font-black uppercase tracking-widest";
-            orderBtn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-            orderBtn.style.color = 'white';
-            orderBtn.style.opacity = '1';
-            orderBtn.disabled = false;
-            orderBtn.onclick = () => {
-                console.log('Order button clicked at:', istTime.toLocaleTimeString());
-                if (isFirebaseConnected) {
-                    trackClick('place_order_button');
-                }
-                window.location.href = "https://clean-scripts.github.io/Easygo-Items/";
-            };
         } else {
             // CLOSED STATE
             notifyBox.classList.remove('hidden');
-            orderBtn.disabled = true;
-            orderBtn.style.background = '#e5e7eb';
-            orderBtn.style.color = '#9ca3af';
-            orderBtn.style.opacity = '0.5';
-            orderBtn.onclick = null;
-
+            
             let secondsLeft = (currentTotalSec < startTotalSec) ? (startTotalSec - currentTotalSec) : ((86400 - currentTotalSec) + startTotalSec);
             const h = Math.floor(secondsLeft / 3600);
             const m = Math.floor((secondsLeft % 3600) / 60);
@@ -631,26 +605,23 @@
             }
         }
         
-        // Clean phone number (remove spaces, dashes, etc)
+        // Clean phone number
         const cleanPhone = phone.replace(/\D/g, '');
         
-        // WhatsApp message with better formatting
+        // WhatsApp message
         const message = `*🥟 EASY GO - CRAVING ALERT! 🥟*%0A%0A*Hello from ${name}!*%0A%0AI'm eagerly waiting for your delicious momos to be available!%0A%0A*📍 My Details:*%0A• *Name:* ${name}%0A• *Phone:* ${phone}%0A• *Time:* ${new Date().toLocaleTimeString('en-IN', {timeZone: 'Asia/Kolkata'})} IST%0A%0A*🍽️ I'm ready to order as soon as you're open!*%0A*🚀 Please notify me when the kitchen is LIVE!*%0A%0A_This message was sent via Easy Go Notify System_`;
         
-        // Easy Go WhatsApp number
         const whatsappNumber = "917651837322";
-        
-        // Create WhatsApp URL
         const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
         
-        // Close modal first
+        // Close modal
         closeNotifyModal();
         
         // Clear form
         document.getElementById('leadName').value = '';
         document.getElementById('leadPhone').value = '';
         
-        // Open WhatsApp in new tab
+        // Open WhatsApp
         window.open(whatsappUrl, '_blank');
         
         // Show confirmation
@@ -690,7 +661,7 @@
 
         const waNumber = "917651837322";
 
-        // Formatting the message for a professional developer look
+        // Format bug report message
         const message = 
 `*🛑 BUG REPORT @EASYGO*%0A
 ---------------------------%0A
@@ -707,10 +678,10 @@
 ---------------------------%0A
 _Sent from Easy Go Auto-Diagnostics_`;
 
-        // 1. Alert User
+        // Alert user
         alert("Technical Log Generated! Hit 'Send' on WhatsApp to finish the Report. 🛠️");
 
-        // 2. Open WhatsApp with pre-filled technical data
+        // Open WhatsApp
         const waUrl = `https://wa.me/${waNumber}?text=${message}`;
         window.open(waUrl, '_blank');
         
