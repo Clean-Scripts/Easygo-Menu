@@ -1,17 +1,17 @@
-// easygo-db.js - Shared Database Service
+// easygo-db.js - Unified Database Operations for EasyGo
 class EasyGoDB {
     constructor() {
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
         }
         this.db = firebase.database();
-        this.auth = firebase.auth();
+        console.log("Firebase Database Connected!");
     }
 
-    // =============== ORDER MANAGEMENT ===============
-    createOrder(orderData) {
-        return new Promise((resolve, reject) => {
-            const orderId = 'EG' + Date.now() + Math.floor(Math.random() * 1000);
+    // ================= ORDER MANAGEMENT =================
+    async createOrder(orderData) {
+        try {
+            const orderId = 'EG' + Date.now().toString().slice(-8);
             const timestamp = firebase.database.ServerValue.TIMESTAMP;
             
             const completeOrder = {
@@ -20,154 +20,241 @@ class EasyGoDB {
                 status: 'pending',
                 createdAt: timestamp,
                 updatedAt: timestamp,
-                orderType: orderData.orderType || 'delivery', // 'delivery' or 'pickup'
-                paymentStatus: 'pending'
+                orderType: orderData.orderType || 'delivery',
+                paymentStatus: 'paid'
             };
             
-            this.db.ref('orders/' + orderId).set(completeOrder)
-                .then(() => resolve({ orderId, ...completeOrder }))
-                .catch(reject);
-        });
+            await this.db.ref('orders/' + orderId).set(completeOrder);
+            console.log("✅ Order created:", orderId);
+            return { orderId, ...completeOrder };
+        } catch (error) {
+            console.error("❌ Error creating order:", error);
+            throw error;
+        }
     }
 
-    getOrder(orderId) {
-        return this.db.ref('orders/' + orderId).once('value')
-            .then(snapshot => snapshot.val());
+    async getOrder(orderId) {
+        try {
+            const snapshot = await this.db.ref('orders/' + orderId).once('value');
+            return snapshot.val();
+        } catch (error) {
+            console.error("Error getting order:", error);
+            return null;
+        }
     }
 
-    updateOrderStatus(orderId, status, updateData = {}) {
-        const updates = {
-            status: status,
-            updatedAt: firebase.database.ServerValue.TIMESTAMP,
-            ...updateData
-        };
-        
-        return this.db.ref('orders/' + orderId).update(updates);
-    }
-
-    // =============== CART MANAGEMENT ===============
-    saveCart(userId, cartData) {
-        return this.db.ref('carts/' + userId).set({
-            ...cartData,
-            updatedAt: firebase.database.ServerValue.TIMESTAMP
-        });
-    }
-
-    getCart(userId) {
-        return this.db.ref('carts/' + userId).once('value')
-            .then(snapshot => snapshot.val());
-    }
-
-    // =============== USER/ADMIN MANAGEMENT ===============
-    saveUserProfile(phone, userData) {
-        return this.db.ref('users/' + phone).set({
-            ...userData,
-            phone: phone,
-            lastActive: firebase.database.ServerValue.TIMESTAMP
-        });
-    }
-
-    getUserProfile(phone) {
-        return this.db.ref('users/' + phone).once('value')
-            .then(snapshot => snapshot.val());
-    }
-
-    // =============== RIDER MANAGEMENT ===============
-    assignRider(orderId, riderData) {
-        return this.db.ref('orders/' + orderId).update({
-            riderAssigned: true,
-            riderName: riderData.name,
-            riderPhone: riderData.phone,
-            riderLocation: riderData.location,
-            estimatedDeliveryTime: riderData.eta,
-            deliveryFee: riderData.fee,
-            status: 'assigned_to_rider'
-        });
-    }
-
-    updateRiderLocation(orderId, location) {
-        return this.db.ref('orders/' + orderId + '/riderCurrentLocation').set(location);
-    }
-
-    // =============== ADMIN FUNCTIONS ===============
-    getAllOrders(status = null) {
-        return this.db.ref('orders').once('value')
-            .then(snapshot => {
-                let orders = [];
-                snapshot.forEach(child => {
-                    const order = child.val();
-                    if (!status || order.status === status) {
-                        orders.push(order);
-                    }
-                });
-                return orders.sort((a, b) => b.createdAt - a.createdAt);
+    async updateOrderStatus(orderId, status, updateData = {}) {
+        try {
+            const updates = {
+                status: status,
+                updatedAt: firebase.database.ServerValue.TIMESTAMP,
+                ...updateData
+            };
+            
+            await this.db.ref('orders/' + orderId).update(updates);
+            
+            // Add tracking update
+            await this.addTrackingUpdate(orderId, {
+                status: status,
+                message: `Status: ${status.replace('_', ' ')}`,
+                timestamp: firebase.database.ServerValue.TIMESTAMP
             });
+            
+            console.log("✅ Order updated:", orderId, status);
+            return true;
+        } catch (error) {
+            console.error("Error updating order:", error);
+            return false;
+        }
     }
 
-    getTodaysOrders() {
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        const todayTimestamp = today.getTime();
-        
-        return this.db.ref('orders').once('value')
-            .then(snapshot => {
-                let orders = [];
-                snapshot.forEach(child => {
-                    const order = child.val();
-                    if (order.createdAt >= todayTimestamp) {
-                        orders.push(order);
-                    }
-                });
-                return orders.sort((a, b) => b.createdAt - a.createdAt);
+    async getAllOrders() {
+        try {
+            const snapshot = await this.db.ref('orders').once('value');
+            let orders = [];
+            
+            snapshot.forEach(child => {
+                orders.push(child.val());
             });
+            
+            return orders.sort((a, b) => b.createdAt - a.createdAt);
+        } catch (error) {
+            console.error("Error getting orders:", error);
+            return [];
+        }
     }
 
-    // =============== TRACKING ===============
-    getOrderTracking(orderId) {
-        return this.db.ref('orderTracking/' + orderId).once('value')
-            .then(snapshot => snapshot.val());
+    async getTodayOrders() {
+        try {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const todayTimestamp = today.getTime();
+            
+            const snapshot = await this.db.ref('orders').once('value');
+            let orders = [];
+            
+            snapshot.forEach(child => {
+                const order = child.val();
+                if (order.createdAt >= todayTimestamp) {
+                    orders.push(order);
+                }
+            });
+            
+            return orders.sort((a, b) => b.createdAt - a.createdAt);
+        } catch (error) {
+            console.error("Error getting today's orders:", error);
+            return [];
+        }
     }
 
-    addTrackingUpdate(orderId, update) {
-        const trackingRef = this.db.ref('orderTracking/' + orderId + '/updates').push();
-        return trackingRef.set({
-            ...update,
-            timestamp: firebase.database.ServerValue.TIMESTAMP
+    async getAvailableOrders() {
+        try {
+            const snapshot = await this.db.ref('orders').orderByChild('status').equalTo('ready').once('value');
+            let orders = [];
+            
+            snapshot.forEach(child => {
+                const order = child.val();
+                if (!order.riderAssigned) {
+                    orders.push(order);
+                }
+            });
+            
+            return orders;
+        } catch (error) {
+            console.error("Error getting available orders:", error);
+            return [];
+        }
+    }
+
+    // ================= CART MANAGEMENT =================
+    async saveCart(userId, cartData) {
+        try {
+            await this.db.ref('carts/' + userId).set({
+                ...cartData,
+                updatedAt: firebase.database.ServerValue.TIMESTAMP
+            });
+            console.log("✅ Cart saved for:", userId);
+            return true;
+        } catch (error) {
+            console.error("Error saving cart:", error);
+            return false;
+        }
+    }
+
+    async getCart(userId) {
+        try {
+            const snapshot = await this.db.ref('carts/' + userId).once('value');
+            return snapshot.val();
+        } catch (error) {
+            console.error("Error getting cart:", error);
+            return null;
+        }
+    }
+
+    // ================= TRACKING UPDATES =================
+    async addTrackingUpdate(orderId, updateData) {
+        try {
+            const updateId = 'U' + Date.now().toString().slice(-6);
+            await this.db.ref('tracking/' + orderId + '/updates/' + updateId).set({
+                ...updateData,
+                timestamp: firebase.database.ServerValue.TIMESTAMP
+            });
+            return updateId;
+        } catch (error) {
+            console.error("Error adding tracking update:", error);
+            return null;
+        }
+    }
+
+    async getTrackingUpdates(orderId) {
+        try {
+            const snapshot = await this.db.ref('tracking/' + orderId + '/updates').once('value');
+            const updates = [];
+            
+            snapshot.forEach(child => {
+                updates.push({
+                    id: child.key,
+                    ...child.val()
+                });
+            });
+            
+            return updates.sort((a, b) => b.timestamp - a.timestamp);
+        } catch (error) {
+            console.error("Error getting tracking updates:", error);
+            return [];
+        }
+    }
+
+    // ================= RIDER MANAGEMENT =================
+    async assignRider(orderId, riderData) {
+        try {
+            await this.db.ref('orders/' + orderId).update({
+                riderAssigned: true,
+                riderId: riderData.riderId,
+                riderName: riderData.name,
+                riderPhone: riderData.phone,
+                status: 'assigned_to_rider',
+                assignedAt: firebase.database.ServerValue.TIMESTAMP
+            });
+            
+            await this.addTrackingUpdate(orderId, {
+                status: 'assigned_to_rider',
+                message: `Rider ${riderData.name} assigned`,
+                riderName: riderData.name,
+                riderPhone: riderData.phone
+            });
+            
+            return true;
+        } catch (error) {
+            console.error("Error assigning rider:", error);
+            return false;
+        }
+    }
+
+    async updateRiderLocation(riderId, location) {
+        try {
+            await this.db.ref('riders/' + riderId + '/location').set({
+                ...location,
+                updatedAt: firebase.database.ServerValue.TIMESTAMP
+            });
+            return true;
+        } catch (error) {
+            console.error("Error updating rider location:", error);
+            return false;
+        }
+    }
+
+    // ================= REAL-TIME LISTENERS =================
+    onOrderUpdate(orderId, callback) {
+        this.db.ref('orders/' + orderId).on('value', (snapshot) => {
+            callback(snapshot.val());
         });
     }
 
-    // =============== UTILITIES ===============
-    getOrderStats() {
-        return this.db.ref('orders').once('value')
-            .then(snapshot => {
-                let stats = {
-                    total: 0,
-                    pending: 0,
-                    preparing: 0,
-                    ready: 0,
-                    in_transit: 0,
-                    delivered: 0,
-                    cancelled: 0,
-                    todayRevenue: 0
-                };
-                
-                const today = new Date();
-                today.setHours(0, 0, 0, 0);
-                const todayTimestamp = today.getTime();
-                
-                snapshot.forEach(child => {
-                    const order = child.val();
-                    stats.total++;
-                    stats[order.status] = (stats[order.status] || 0) + 1;
-                    
-                    // Today's revenue
-                    if (order.createdAt >= todayTimestamp && order.total) {
-                        stats.todayRevenue += order.total;
-                    }
-                });
-                
-                return stats;
+    onNewOrders(callback) {
+        this.db.ref('orders').orderByChild('createdAt').startAt(Date.now()).on('child_added', (snapshot) => {
+            callback(snapshot.val());
+        });
+    }
+
+    onTrackingUpdates(orderId, callback) {
+        this.db.ref('tracking/' + orderId + '/updates').on('child_added', (snapshot) => {
+            callback(snapshot.val());
+        });
+    }
+
+    // ================= ANALYTICS =================
+    async logEvent(eventName, data = {}) {
+        try {
+            await this.db.ref('analytics/' + eventName).push({
+                ...data,
+                timestamp: firebase.database.ServerValue.TIMESTAMP,
+                userAgent: navigator.userAgent,
+                url: window.location.href
             });
+        } catch (error) {
+            console.error("Error logging event:", error);
+        }
     }
 }
 
