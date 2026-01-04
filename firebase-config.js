@@ -1,11 +1,19 @@
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+<script>
+// Firebase Configuration - CORRECTED
 const firebaseConfig = {
-  apiKey: "AIzaSyBkBWtdxiN92TOqQni5lM_w1YQfydsKwG0",
-  authDomain: "easygoooo.firebaseapp.com",
-  databaseURL: "https://easygoooo-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "easygoooo",
-  storageBucket: "easygoooo.firebasestorage.app",
-  messagingSenderId: "895871235594",
-  appId: "1:895871235594:web:e918f85a8c4da2ecd391f3",
-  measurementId: "G-VPBJ2QKN1T"
+    apiKey: "AIzaSyA2xQx9D7dNlLfIvR2MYtxcG_YTIGdSQqI",
+    authDomain: "easygoooo.firebaseapp.com",
+    databaseURL: "https://easygoooo.firebaseio.com/",
+    projectId: "easygoooo",
+    storageBucket: "easygoooo.appspot.com",
+    messagingSenderId: "817708705026",
+    appId: "1:817708705026:web:14bb952506eaef8e0ec1e5",
+    measurementId: "G-7PC3YY3FK0"
 };
+
+// Initialize Firebase
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
+const easygoDB = firebase.database();
+</script>
